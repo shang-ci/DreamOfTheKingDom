@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25b3a83af2d49584daf59bd9b31e9b36, type: 3}
+  m_Name: EnemyHp
+  m_EditorClassIdentifier: 
+  maxValue: 100
+  currentValue: 0
+  ValueChangeEvent: {fileID: 11400000, guid: 9c884a8fdea324243abe571bc3b5668f, type: 2}
+  description: "\u654C\u4EBAHP"

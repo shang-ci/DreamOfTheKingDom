@@ -1,0 +1,172 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a887be011ef54743ac16bf55d4d0da5, type: 3}
+  m_Name: MapLayoutSO
+  m_EditorClassIdentifier: 
+  mapRoomDataList:
+  - posX: -9.666667
+    posY: 2
+    column: 0
+    line: 0
+    roomType: 1
+    roomState: 1
+    linkTo:
+    - {x: 1, y: 3}
+    - {x: 1, y: 1}
+  - posX: -9.666667
+    posY: -2
+    column: 0
+    line: 1
+    roomType: 1
+    roomState: 0
+    linkTo:
+    - {x: 1, y: 2}
+    - {x: 1, y: 0}
+  - posX: -7.117049
+    posY: 3.6
+    column: 1
+    line: 0
+    roomType: 2
+    roomState: 0
+    linkTo:
+    - {x: 2, y: 0}
+  - posX: -6.359326
+    posY: 1.1999998
+    column: 1
+    line: 1
+    roomType: 1
+    roomState: 1
+    linkTo:
+    - {x: 2, y: 2}
+  - posX: -6.955562
+    posY: -1.2000003
+    column: 1
+    line: 2
+    roomType: 2
+    roomState: 0
+    linkTo:
+    - {x: 2, y: 1}
+  - posX: -6.473186
+    posY: -3.6000004
+    column: 1
+    line: 3
+    roomType: 1
+    roomState: 0
+    linkTo:
+    - {x: 2, y: 3}
+  - posX: -3.1233168
+    posY: 3.6
+    column: 2
+    line: 0
+    roomType: 16
+    roomState: 0
+    linkTo:
+    - {x: 3, y: 0}
+  - posX: -3.0003123
+    posY: 1.1999998
+    column: 2
+    line: 1
+    roomType: 2
+    roomState: 0
+    linkTo:
+    - {x: 3, y: 1}
+  - posX: -3.8809326
+    posY: -1.2000003
+    column: 2
+    line: 2
+    roomType: 4
+    roomState: 1
+    linkTo:
+    - {x: 3, y: 0}
+  - posX: -2.8692493
+    posY: -3.6000004
+    column: 2
+    line: 3
+    roomType: 16
+    roomState: 0
+    linkTo:
+    - {x: 3, y: 1}
+  - posX: 0.13965696
+    posY: 2
+    column: 3
+    line: 0
+    roomType: 8
+    roomState: 1
+    linkTo:
+    - {x: 4, y: 3}
+    - {x: 4, y: 0}
+    - {x: 4, y: 2}
+  - posX: 0.009155691
+    posY: -2
+    column: 3
+    line: 1
+    roomType: 8
+    roomState: 0
+    linkTo:
+    - {x: 4, y: 1}
+  - posX: 3.2081733
+    posY: 3.6
+    column: 4
+    line: 0
+    roomType: 4
+    roomState: 1
+    linkTo:
+    - {x: 5, y: 0}
+    - {x: 5, y: 1}
+  - posX: 2.939537
+    posY: 1.1999998
+    column: 4
+    line: 1
+    roomType: 4
+    roomState: 0
+    linkTo:
+    - {x: 5, y: 0}
+  - posX: 2.8943627
+    posY: -1.2000003
+    column: 4
+    line: 2
+    roomType: 4
+    roomState: 0
+    linkTo:
+    - {x: 5, y: 0}
+  - posX: 2.3256729
+    posY: -3.6000004
+    column: 4
+    line: 3
+    roomType: 2
+    roomState: 0
+    linkTo:
+    - {x: 5, y: 0}
+  - posX: 6.3104825
+    posY: 2
+    column: 5
+    line: 0
+    roomType: 16
+    roomState: 2
+    linkTo:
+    - {x: 6, y: 0}
+  - posX: 5.186639
+    posY: -2
+    column: 5
+    line: 1
+    roomType: 16
+    roomState: 2
+    linkTo:
+    - {x: 6, y: 0}
+  - posX: 8.666667
+    posY: 0
+    column: 6
+    line: 0
+    roomType: 32
+    roomState: 0
+    linkTo: []
+  linePositionList: []
