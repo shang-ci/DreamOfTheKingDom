@@ -48,8 +48,7 @@ MonoBehaviour:
   - m_GUID: 063e07822ca3de349a53b38a86ffd46d
     m_Address: "\u7FFB\u4E66"
     m_ReadOnly: 0
-    m_SerializedLabels:
-    - CardData
+    m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 75f93bf30c7c55c4da3a74e17759527a, type: 2}

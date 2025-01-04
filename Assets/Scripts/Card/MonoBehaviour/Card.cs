@@ -14,12 +14,13 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public CardDataSO cardData;
 
     [Header("原始数据")]
+    // 卡牌原始位置——鼠标选中时，卡牌会上移，所以需要记录原始位置
     public Vector3 originalPosition;
     public Quaternion originalRotation;
-    public int originalLayerOrder;
+    public int originalLayerOrder;// 卡牌原始层级
 
-    public bool isAnimating;
-    public bool isAvailiable;
+    public bool isAnimating;//是否正在移动中/抽卡的动画中——若是在移动就不能让它有上移效果
+    public bool isAvailiable;//判断player的当前能量是否足够使用这张卡
 
     public Player player;
 
@@ -50,6 +51,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         player = GameObject.FindWithTag("Player").GetComponent<Player>();
     }
 
+    //保存卡牌的原始位置和旋转、层级
     public void UpdatePositionRotation(Vector3 position, Quaternion rotation)
     {
         this.originalPosition = position;
@@ -64,7 +66,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             return;
         }
         // todo 如果当前是扇形布局的话，可以将 transform.position.y 修改为一个固定值，比如 3.5
-        transform.position = originalPosition + Vector3.up;
+        transform.position = originalPosition + Vector3.up;//这里用新变量保存，防止多次经过卡牌时，transform.position.y 不断增加
         transform.rotation = Quaternion.identity;
         GetComponent<SortingGroup>().sortingOrder = 20;
     }
@@ -72,12 +74,11 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public void OnPointerExit(PointerEventData eventData)
     {
         if (isAnimating)
-        {
             return;
-        }
         ResetCardTransform();
     }
 
+    // 重置卡牌位置——鼠标离开时调用
     public void ResetCardTransform()
     {
         transform.SetPositionAndRotation(originalPosition, originalRotation);
@@ -95,6 +96,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         }
     }
 
+    //更新卡牌状态颜色标识玩家的能量是否够用——判断是否能使用
     public void UpdateCardState()
     {
         isAvailiable = cardData.cost <= player.CurrentMana;

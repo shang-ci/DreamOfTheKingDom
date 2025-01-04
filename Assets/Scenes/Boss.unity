@@ -155,7 +155,6 @@ SpriteRenderer:
   m_RayTraceProcedural: 0
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
-  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -200,7 +199,7 @@ Transform:
   m_GameObject: {fileID: 207436351}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 3.62, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -323,7 +322,6 @@ MeshRenderer:
   m_RayTraceProcedural: 0
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
-  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -474,7 +472,6 @@ MeshRenderer:
   m_RayTraceProcedural: 0
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
-  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -601,7 +598,6 @@ MeshRenderer:
   m_RayTraceProcedural: 0
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
-  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -713,7 +709,6 @@ MeshRenderer:
   m_RayTraceProcedural: 0
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
-  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -958,7 +953,6 @@ MeshRenderer:
   m_RayTraceProcedural: 0
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
-  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1002,7 +996,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2054977722}
   - component: {fileID: 2054977723}
-  - component: {fileID: 2054977721}
   - component: {fileID: 2054977720}
   - component: {fileID: 2054977719}
   - component: {fileID: 2054977718}
@@ -1133,7 +1126,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2054977713}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 543c7eb0f99cb9d42820de181b9de996, type: 3}
   m_Name: 
@@ -1185,9 +1178,6 @@ MonoBehaviour:
   m_ParentUI: {fileID: 0}
   sourceAsset: {fileID: 9197481963319205126, guid: 729956a36253dab4699486cf275604b1, type: 3}
   m_SortingOrder: 0
-  m_WorldSpaceSizeMode: 1
-  m_WorldSpaceWidth: 1920
-  m_WorldSpaceHeight: 1080
 --- !u!61 &2054977720
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1234,32 +1224,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 11.375022, y: 12.069213}
   m_EdgeRadius: 0
---- !u!114 &2054977721
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2054977713}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a83fcedc46f046c4dab70094a97e57a1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHp: 70
-  hp: {fileID: 11400000, guid: 2b26bd4f45b99bc449b0e6f2ac4cc96b, type: 2}
-  defense: {fileID: 11400000, guid: c0b72c3554a6eab4ebe67f5c0782522c, type: 2}
-  buffRound: {fileID: 11400000, guid: 4580fe0700756ee45a8480e0aad4e52f, type: 2}
-  isDead: 0
-  buff: {fileID: 632236726}
-  debuff: {fileID: 745131489}
-  baseStrength: 1
-  strengthEffect: 0.5
-  characterDeadEvent: {fileID: 11400000, guid: 5c3b29e6903d10e4b8d8cbd39bdc35a3, type: 2}
-  actionDataSO: {fileID: 11400000, guid: 142958bfc80695740a32f23f044fad60, type: 2}
-  currentAction:
-    intentSprite: {fileID: 0}
-    effect: {fileID: 0}
 --- !u!4 &2054977722
 Transform:
   m_ObjectHideFlags: 0

@@ -1,10 +1,14 @@
 using UnityEngine;
 
+//管理卡牌的拖拽箭头
 public class DragArrow : MonoBehaviour
 {
     private LineRenderer lineRenderer;
-    public int pointsCount;
-    public float arcModifier;
+
+    //改变曲线的形状
+    public int pointsCount;// 设置 LineRenderer 的点的数量
+    public float arcModifier;//调整这个值来改变曲线的形状
+
     private Vector3 mousePos;
 
     private void Awake() 
@@ -14,12 +18,11 @@ public class DragArrow : MonoBehaviour
 
     private void Update() 
     {
-        mousePos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f));
-        // lineRenderer.SetPosition(0, transform.position);
-        // lineRenderer.SetPosition(1, mousePos);
+        mousePos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f));//将鼠标屏幕坐标转换为世界坐标
         SetArrowPosition();
     }
 
+    //设置箭头位置
     public void SetArrowPosition()
     {
         Vector3 cardPosition = transform.position; // 卡牌位置
@@ -37,6 +40,7 @@ public class DragArrow : MonoBehaviour
 
         lineRenderer.positionCount = pointsCount; // 设置 LineRenderer 的点的数量
 
+        // 逐一设置 LineRenderer 的点的位置
         for (int i = 0; i < pointsCount; i++)
         {
             float t = i / (float)(pointsCount - 1);

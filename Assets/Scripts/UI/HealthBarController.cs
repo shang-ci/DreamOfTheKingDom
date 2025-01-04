@@ -11,6 +11,7 @@ public class HealthBarController : MonoBehaviour
     private UIDocument healthBarDocument;
     private ProgressBar healthBar;
 
+    //防御状态的控制
     private VisualElement defenseElement;
     private Label defenseAmountLabel;
 
@@ -20,6 +21,7 @@ public class HealthBarController : MonoBehaviour
     public Sprite buffSprite;
     public Sprite debuffSprite;
 
+    //制作敌人的意图图标显示
     private Enemy enemy;
     private VisualElement intentSprite;
     private Label intentAmount;
@@ -30,29 +32,33 @@ public class HealthBarController : MonoBehaviour
         enemy = GetComponent<Enemy>();
     }
 
+    //初始化血条——正好让其在玩家启用时调用
     private void OnEnable() 
     {
         InitHealthBar();
     }
 
+    //让制作的UI血条位于玩家头顶
     private void MoveToWorldPosition(VisualElement element, Vector3 worldPosition, Vector2 size)
     {
         Rect rect = RuntimePanelUtils.CameraTransformWorldToPanelRect(element.panel, worldPosition, size, Camera.main);
         element.transform.position = rect.position;
     }
 
+    
     [ContextMenu("Get UI Position")]
     public void InitHealthBar()
     {
         healthBarDocument = GetComponent<UIDocument>();
         healthBar = healthBarDocument.rootVisualElement.Q<ProgressBar>("HealthBar");
 
-        healthBar.highValue = currentCharacter.MaxHP;
-        MoveToWorldPosition(healthBar, healthBarTransform.position, Vector2.zero);
+        healthBar.highValue = currentCharacter.MaxHP;//设置血条最大值
+        MoveToWorldPosition(healthBar, healthBarTransform.position, Vector2.zero);//设置血条位置
 
+        //获取防御的相关图标
         defenseElement = healthBar.Q<VisualElement>("Defense");
         defenseAmountLabel = defenseElement.Q<Label>("DefenseAmount");
-        defenseElement.style.display = DisplayStyle.None;
+        defenseElement.style.display = DisplayStyle.None;//图标隐藏
 
         buffElement = healthBar.Q<VisualElement>("Buff");
         buffRound = buffElement.Q<Label>("BuffRound");
@@ -71,6 +77,7 @@ public class HealthBarController : MonoBehaviour
         UpdateHealthBar();
     }
 
+    //这个就是更新血条的方法，每次血量变化引起事件都会调用这个方法——unity UITool Uss实现
     public void UpdateHealthBar()
     {
         if (currentCharacter.isDead)
@@ -84,12 +91,11 @@ public class HealthBarController : MonoBehaviour
             healthBar.title = $"{currentCharacter.CurrentHP}/{currentCharacter.MaxHP}";
             healthBar.value = currentCharacter.CurrentHP;
 
+            //卸掉所有的USS的class——方便根据血量显示不同的颜色，达到不同血量显示不同颜色的效果，添加不同的class即可
             healthBar.RemoveFromClassList("highHealth");
             healthBar.RemoveFromClassList("mediumHealth");
             healthBar.RemoveFromClassList("lowHealth");
-
             var percentage = (float)currentCharacter.CurrentHP / (float)currentCharacter.MaxHP;
-
             if (percentage < 0.3f)
             {
                 healthBar.AddToClassList("lowHealth");
@@ -107,7 +113,7 @@ public class HealthBarController : MonoBehaviour
             defenseElement.style.display = currentCharacter.defense.currentValue > 0 ? DisplayStyle.Flex : DisplayStyle.None;
             defenseAmountLabel.text = currentCharacter.defense.currentValue.ToString();
 
-            // buff 回合更新
+            // buff 回合更新——显示buff图标和持续的回合数
             buffElement.style.display = currentCharacter.buffRound.currentValue > 0 ? DisplayStyle.Flex : DisplayStyle.None;
             buffRound.text = currentCharacter.buffRound.currentValue.ToString();
             buffElement.style.backgroundImage = currentCharacter.baseStrength > 1 ? new StyleBackground(buffSprite) : new StyleBackground(debuffSprite);
@@ -115,9 +121,7 @@ public class HealthBarController : MonoBehaviour
     }
 
 
-    /// <summary>
-    /// 在玩家回合开始时
-    /// </summary>
+    //展示敌人的意图，在玩家回合开始时调用，是下一回合敌人的意图
     public void SetIntentElement()
     {
         intentSprite.style.display = DisplayStyle.Flex;
@@ -127,15 +131,13 @@ public class HealthBarController : MonoBehaviour
         var value = enemy.currentAction.effect.value;
         if (enemy.currentAction.effect.GetType() == typeof(DamageEffect))
         {
-            value = (int) math.round(enemy.currentAction.effect.value * enemy.baseStrength);
+            value = (int) math.round(enemy.currentAction.effect.value * enemy.baseStrength);//计算伤害
         }
 
         intentAmount.text = value.ToString();
     }
 
-    /// <summary>
-    /// 敌人回合结束之后
-    /// </summary>
+    //隐藏敌人的意图——在敌人回合结束时调用
     public void HideIntentElement()
     {
         intentSprite.style.display = DisplayStyle.None;

@@ -25,6 +25,7 @@ public class PoolTool : MonoBehaviour
         PreFillPool(7);
     }
 
+    //先创建7个
     private void PreFillPool(int count) 
     {
         var preFillArray = new GameObject[count];
@@ -39,11 +40,13 @@ public class PoolTool : MonoBehaviour
         }
     }
 
+    //从对象池中获取对象——取出一张卡牌
     public GameObject GetObjectFromPool()
     {
         return pool.Get();
     }
 
+    //将对象放回对象池——将卡牌放回卡牌池
     public void ReleaseObjectToPool(GameObject obj)
     {
         pool.Release(obj);

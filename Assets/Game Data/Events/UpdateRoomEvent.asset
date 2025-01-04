@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a7f78bddfbaa024b9152bd1d1b5b895, type: 3}
   m_Name: UpdateRoomEvent
   m_EditorClassIdentifier: 
-  description: "\u4F20\u9012Vector2Int\u66F4\u65B0\u623F\u95F4\u72B6\u6001"
+  description: "\u4F20\u9012Vector2Int\u66F4\u65B0\u623F\u95F4\u72B6\u6001\u4EE5\u53CA\u5730\u56FE\u7684\u8DDF\u65B0"
   lastSender: 

@@ -7,11 +7,14 @@ using UnityEngine.UIElements;
 public class PickCardPanel : MonoBehaviour
 {
     public CardManager cardManager;
+
     private VisualElement rootElement;
-    public VisualTreeAsset cardTemplate;
-    private VisualElement cardContainer;
+    public VisualTreeAsset cardTemplate;//一个卡牌模板
+    private VisualElement cardContainer;//放待抽取卡牌的容器
     private CardDataSO currentCardData;
+
     private Button confirmButton;
+
     private List<Button> cardButtons = new List<Button>();
 
     [Header("广播事件")]
@@ -25,26 +28,31 @@ public class PickCardPanel : MonoBehaviour
 
         confirmButton.clicked += OnConfirmButtonClicked;
 
+        // 初始化三张卡牌
         for (int i = 0; i < 3; i++)
         {
             var card = cardTemplate.Instantiate();
-            var data = cardManager.GetNewCardData();
-            // 初始化
+            var data = cardManager.GetNewCardData();//获得新的卡牌数据
+
+            // 填充卡牌数据到卡牌模板中
             InitCard(card, data);
-            var cardButton = card.Q<Button>("Card");
-            cardContainer.Add(card);
+
+            var cardButton = card.Q<Button>("Card");//获取卡牌身上的按钮
+            cardContainer.Add(card);//将卡牌添加到容器中
             cardButtons.Add(cardButton);
 
             cardButton.clicked += () => OnCardClicked(cardButton, data);
         }
     }
 
+    //点击确认按钮时，解锁卡牌——广播，关闭抽卡面板、隐藏抽卡按钮
     private void OnConfirmButtonClicked()
     {
-        cardManager.UnlockCard(currentCardData);
+        cardManager.UnlockCard(currentCardData);//解锁卡牌
         finishPickCardEvent.RaiseEvent(null, this);
     }
 
+    //点击卡牌时，高亮未选中的卡牌
     private void OnCardClicked(Button cardButton, CardDataSO data)
     {
         currentCardData = data;
@@ -64,6 +72,7 @@ public class PickCardPanel : MonoBehaviour
         }
     }
 
+    //把卡牌数据填充到卡牌模板中
     public void InitCard(VisualElement card, CardDataSO cardData)
     {
         var cardSpriteElement = card.Q<VisualElement>("CardSprite");

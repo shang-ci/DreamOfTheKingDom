@@ -188,7 +188,7 @@ public class MapGenerator : MonoBehaviour
         return targetRoom;
     }
 
-    // 重新生成地图
+    // 重新生成地图，可以在编辑器中点击 ReGenerateRoom 按钮调用
     [ContextMenu("ReGenerateRoom")]
     public void ReGenerateRoom()
     {

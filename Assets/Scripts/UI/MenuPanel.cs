@@ -8,6 +8,7 @@ public class MenuPanel : MonoBehaviour
     private Button newGameButton;
     private Button quitButton;
 
+    [Header("newgame广播")]
     public ObjectEventSO newGameEvent;
 
     private void OnEnable() 
@@ -25,6 +26,7 @@ public class MenuPanel : MonoBehaviour
         Application.Quit();
     }
 
+    //点击新游戏按钮时，广播newgame事件——加载地图
     private void OnNewGameButtonClicked()
     {
         newGameEvent.RaiseEvent(null, this);

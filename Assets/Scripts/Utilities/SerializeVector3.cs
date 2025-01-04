@@ -1,5 +1,6 @@
 using UnityEngine;
 
+//将Vector3序列化为可存储的数据
 public class SerializeVector3
 {
     public float x, y, z;

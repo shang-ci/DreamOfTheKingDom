@@ -27,16 +27,19 @@ public class GameWinPanel : MonoBehaviour
         pickCardButton.clicked -= OnPickCardButtonClicked;
     }
 
+    //点击抽卡按钮时，抽卡广播事件显示抽卡面板
     private void OnPickCardButtonClicked()
     {
         pickCardEvent.RaiseEvent(null, this);
     }
 
+    //点击back按钮时，返回地图——
     private void OnBackToMapButtonClicked()
     {
         loadMapEvent.RaiseEvent(null, this);
     }
 
+    //隐藏抽卡按钮——当抽卡完成时触发事件
     public void OnFinishPickCardEvent()
     {
         pickCardButton.style.display = DisplayStyle.None;

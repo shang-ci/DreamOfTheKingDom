@@ -19,8 +19,8 @@ public class CardLayoutManager : MonoBehaviour
     public Vector3 centerPoint;
 
     [SerializeField]
-    private List<Vector3> cardPositions = new List<Vector3>();
-    private List<Quaternion> cardRotations = new List<Quaternion>();
+    private List<Vector3> cardPositions = new List<Vector3>();//位置
+    private List<Quaternion> cardRotations = new List<Quaternion>();//旋转角度
 
     private void Awake() {
         centerPoint = isHorizontal ? Vector3.up * -4.5f : Vector3.up * -21.5f;
@@ -40,7 +40,7 @@ public class CardLayoutManager : MonoBehaviour
     }
 
     /// <summary>
-    /// 计算卡牌的位置
+    /// 计算卡牌的位置——每次只要有卡牌加入或者离开，就需要重新计算一次卡牌的位置
     /// </summary>
     /// <param name="numberOfCards">当前有多少张卡牌</param>
     /// <param name="horizontal">横向还是扇形</param>

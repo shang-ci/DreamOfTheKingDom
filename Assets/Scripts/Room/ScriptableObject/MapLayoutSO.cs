@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//用来保存地图数据
 [CreateAssetMenu(fileName = "MapLayoutSO", menuName = "Map/MapLayoutSO")]
 public class MapLayoutSO : ScriptableObject 
 {
@@ -8,6 +9,7 @@ public class MapLayoutSO : ScriptableObject
     public List<LinePosition> linePositionList = new List<LinePosition>();
 }
 
+//房间数据，保存房间的位置，类型，状态，以及与之相连的房间
 [System.Serializable]
 public class MapRoomData 
 {
@@ -20,6 +22,7 @@ public class MapRoomData
     public List<Vector2Int> linkTo;
 }
 
+//将Vector3序列化，保存连线的起始点和终点
 [System.Serializable]
 public class LinePosition
 {
