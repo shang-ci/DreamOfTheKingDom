@@ -1,0 +1,35 @@
+/* 状态条容器：水平布局，从左到右排列 */
+#StatusBar {
+    background-color: rgba(0, 0, 0, 0);
+    border: none; 
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 2px;
+    gap: 5px; /* 每个状态之间的间距 */
+}
+
+/* 单个状态项的容器 */
+.status-item {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.6); /* 半透明背景 */
+    padding: 5px;
+    border-radius: 5px;
+    min-width: 50px;
+}
+
+/* 状态名称的样式 */
+.status-name {
+    font-size: 12px;
+    color: white;
+    text-align: center;
+}
+
+/* 状态点数的样式 */
+.status-value {
+    font-size: 14px;
+    color: yellow;
+    text-align: center;
+}

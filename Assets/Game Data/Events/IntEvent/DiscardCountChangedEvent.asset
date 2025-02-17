@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bad1de00f70600419e7a74366357b30, type: 3}
+  m_Name: DiscardCountChangedEvent
+  m_EditorClassIdentifier: 
+  description: "\u5F03\u724C\u5806\u6570\u5B57\u53D8\u5316\u4E8B\u4EF6\uFF0C\u901A\u77E5UI"
+  lastSender: 
