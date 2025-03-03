@@ -41,7 +41,7 @@ public class CardDeck : MonoBehaviour
         InitializeDeck();
     }
 
-    //初始化，将卡牌库中的卡牌复制到抽牌堆中——每开启一轮战斗时调用
+    //初始化，将卡牌库中的卡牌复制到抽牌堆中——每开启一轮战斗时调用——抽牌堆拿到的都是原始卡牌数据
     public void InitializeDeck()
     {
         drawDeck.Clear();
@@ -64,7 +64,7 @@ public class CardDeck : MonoBehaviour
     }
 
     /// <summary>
-    /// 事件监听函数
+    /// 事件监听函数——玩家回合开始时调用——抽取4张卡牌
     /// </summary>
     public void NewTurnDrawCards()
     {
@@ -171,15 +171,30 @@ public class CardDeck : MonoBehaviour
     {
         Card card = obj as Card;
 
-        discardDeck.Add(card.cardData);
+        discardDeck.Add(card.GetOriginalCardData());//把初始数据放入弃牌堆——保持每次抽牌都是用的初始数据
         handCardObjectList.Remove(card);
 
-        cardManager.DiscardCard(card.gameObject);
+        cardManager.DiscardCard(card.gameObject);//卡牌池回收
 
         // 更新弃牌堆 UI
         discardCountEvent.RaiseEvent(discardDeck.Count, this);
 
         SetCardLayout(0);
+    }
+
+    //随机x张弃牌
+    public void DiscardRandomCard(int value)
+    {
+        for (int i = 0; i < value; i++)
+        {
+            if (handCardObjectList.Count > 0)
+            {
+                int randomIndex = Random.Range(0, handCardObjectList.Count);
+                Card cardToDiscard = handCardObjectList[randomIndex];
+
+                DiscardCard(cardToDiscard);
+            }
+        }
     }
 
     /// <summary>
@@ -189,7 +204,7 @@ public class CardDeck : MonoBehaviour
     {
         for (int i = 0; i < handCardObjectList.Count; i++)
         {
-            discardDeck.Add(handCardObjectList[i].cardData);
+            discardDeck.Add(handCardObjectList[i].GetOriginalCardData());//把初始数据放入弃牌堆——保持每次抽牌都是用的初始数据
             cardManager.DiscardCard(handCardObjectList[i].gameObject);
         }
 
@@ -197,7 +212,7 @@ public class CardDeck : MonoBehaviour
         discardCountEvent.RaiseEvent(discardDeck.Count, this);
     }
 
-    //回收所有卡牌——当游戏结束时调用
+    //回收所有卡牌——当游戏结束时调用——玩家或者怪物死亡时
     public void ReleaseAllCards(object obj)
     {
         foreach (var card in handCardObjectList)
@@ -206,30 +221,19 @@ public class CardDeck : MonoBehaviour
         }
 
         handCardObjectList.Clear();
-        InitializeDeck();//在结束时重新初始化卡牌堆，防止下一轮粗线错误
+        //InitializeDeck();//在结束时重新初始化卡牌堆，防止下一轮粗线错误——必须要在解锁新卡牌之后再初始化卡牌堆
     }
 
-    // 根据卡牌名字从 drawDeck 或 discardDeck 中获取所有 CardDataSO
+    // 根据卡牌名字从 drawDeck 或 discardDeck 中获取所有 CardDataSO——获得的是卡牌数据的副本
     public List<CardDataSO> GetAllCardDataByName(string cardName)
     {
+        return cardManager.GetAllCardDataClonesByName(cardName);
+    }
+
+    // 根据卡牌名字从 handCardObjectList 中获取所有 CardDataSO——获得的是卡牌数据的副本
+    public List<CardDataSO> GetHandCardDataByName(string cardName)
+    {
         List<CardDataSO> result = new List<CardDataSO>();
-
-        foreach (var cardData in drawDeck)
-        {
-            if (cardData.cardName == cardName)
-            {
-                result.Add(cardData);
-            }
-        }
-
-        foreach (var cardData in discardDeck)
-        {
-            if (cardData.cardName == cardName)
-            {
-                result.Add(cardData);
-            }
-        }
-
         foreach (var cardData in handCardObjectList)
         {
             if (cardData.cardData.cardName == cardName)
@@ -237,6 +241,30 @@ public class CardDeck : MonoBehaviour
                 result.Add(cardData.cardData);
             }
         }
-            return result;
+        return result;
+    }
+
+    // 还原所有卡牌数据
+    public void RestoreAllCards()
+    {
+        foreach (var card in handCardObjectList)
+        {
+            card.RestoreOriginalCardData();
+        }
+    }
+
+    //TOOD:以后要完善成根据卡牌类型获取对应卡牌数量，要有两个参数，一个是卡牌类型，一个是卡牌堆类型
+    public int GetDrawDeckCountByType()
+    {
+        // 获取抽牌堆中的攻击牌数量
+        int attackCardCount = 0;
+        foreach (var cardData in drawDeck)
+        {
+            if (cardData.cardType == CardType.Attack)
+            {
+                attackCardCount++;
+            }
+        }
+        return attackCardCount;
     }
 }

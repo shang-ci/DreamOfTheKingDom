@@ -5,13 +5,6 @@ public class HealEffect : Effect
 {
     public override void Execute(CharacterBase from, CharacterBase target)
     {
-        if (targetType == EffectTargetType.Self)
-        {
-            from.HealHealth(value);
-        }
-        else if (targetType == EffectTargetType.Target)
-        {
-            target.HealHealth(value);
-        }
+        target.HealHealth(value);
     }
 }

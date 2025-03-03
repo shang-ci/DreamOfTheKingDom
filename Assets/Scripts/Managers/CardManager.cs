@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
+using static UnityEngine.GraphicsBuffer;
 
 public class CardManager : MonoBehaviour
 {
@@ -21,6 +22,9 @@ public class CardManager : MonoBehaviour
     public CardLibrarySO currentLibrary;
 
     private int previousIndex = 0;
+
+    // 管理卡牌数据副本的字典
+    [SerializeField]private Dictionary<CardDataSO, CardDataSO> cardDataClones = new Dictionary<CardDataSO, CardDataSO>();
 
     private void Awake() 
     {
@@ -94,10 +98,14 @@ public class CardManager : MonoBehaviour
 
         // 添加前三个卡牌到 newGameCardLibrary
         newGameCardLibrary.entryList.Clear();
-        newGameCardLibrary.entryList.Add(new CardLibraryEntry { cardData = excelCardDataList[0], amount = 1 });
-        newGameCardLibrary.entryList.Add(new CardLibraryEntry { cardData = excelCardDataList[8], amount = 1 });
-        newGameCardLibrary.entryList.Add(new CardLibraryEntry { cardData = excelCardDataList[6], amount = 1 });
-        newGameCardLibrary.entryList.Add(new CardLibraryEntry { cardData = excelCardDataList[7], amount = 1 });
+        newGameCardLibrary.entryList.Add(new CardLibraryEntry { cardData = excelCardDataList[9], amount = 1 });
+        newGameCardLibrary.entryList.Add(new CardLibraryEntry { cardData = excelCardDataList[10], amount = 1 });
+        newGameCardLibrary.entryList.Add(new CardLibraryEntry { cardData = excelCardDataList[11], amount = 1 });
+        newGameCardLibrary.entryList.Add(new CardLibraryEntry { cardData = excelCardDataList[12], amount = 1 });
+        newGameCardLibrary.entryList.Add(new CardLibraryEntry { cardData = excelCardDataList[13], amount = 1 });
+        newGameCardLibrary.entryList.Add(new CardLibraryEntry { cardData = excelCardDataList[14], amount = 1 });
+        newGameCardLibrary.entryList.Add(new CardLibraryEntry { cardData = excelCardDataList[0], amount = 2 });
+
     }
 
 
@@ -137,15 +145,28 @@ public class CardManager : MonoBehaviour
     {
         var newCard = new CardLibraryEntry
         {
-            cardData = newCardData,
+            cardData = newCardData,//从cardList中读取出的原版数据
             amount = 1
         };
 
         // 如果卡牌库中已经有这张卡牌，那么只需要将数量加1
-        if (currentLibrary.entryList.Contains(newCard))
+        //if (currentLibrary.entryList.Contains(newCard))
+        //{
+        //    Debug.Log("已经有这张卡牌了");
+        //    var target = currentLibrary.entryList.Find(t => t.cardData.Equals(newCardData));//可能是应为carddataSO里的Effect不同，所以这里的Find方法找不到——不存在这种情况，因为current List和newCardData都是从Excel表中读取的原版数据
+        //    target.amount++;
+        //    Debug.Log(target.amount);
+        //}
+        //由于 CardLibraryEntry 是一个结构体（值类型），即使 Find 方法返回的是引用，它也会被装箱为一个新的对象。因此，target 实际上是一个新的对象，而不是 currentLibrary.entryList 中的原始对象
+
+        int index = currentLibrary.entryList.FindIndex(t => t.cardData.Equals(newCardData));
+        if (index != -1)
         {
-            var target = currentLibrary.entryList.Find(t => t.cardData == newCardData);
+            Debug.Log("已经有这张卡牌了");
+            var target = currentLibrary.entryList[index];
             target.amount++;
+            currentLibrary.entryList[index] = target; // 更新列表中的元素
+            Debug.Log(target.amount);
         }
         else
         {
@@ -167,5 +188,61 @@ public class CardManager : MonoBehaviour
             }
         }
         return attackCards;
+    }
+
+
+
+    // 获取卡牌数据的副本——每个卡牌数据只需要一个副本，避免重复创建
+    public CardDataSO GetCardDataClone(CardDataSO original)
+    {
+        if (!cardDataClones.ContainsKey(original))
+        {
+            cardDataClones[original] = original.Clone();
+        }
+        return cardDataClones[original];
+    }
+
+    // 获取所有卡牌数据的副本
+    public List<CardDataSO> GetAllCardDataClonesByName(string cardName)
+    {
+        List<CardDataSO> result = new List<CardDataSO>();
+
+        foreach (var entry in currentLibrary.entryList)
+        {
+            if (entry.cardData.cardName == cardName)
+            {
+                result.Add(GetCardDataClone(entry.cardData));
+            }
+        }
+
+        return result;
+    }
+
+    // 删除卡牌数据的副本
+    public void RemoveCardDataClone(CardDataSO original)
+    {
+        if (cardDataClones.ContainsKey(original))
+        {
+            cardDataClones.Remove(original);
+        }
+    }
+
+    // 还原所有卡牌数据——不好用只有手牌能还原
+    public void RestoreAllCards()
+    {
+        CardDeck.instance.RestoreAllCards();
+    }
+
+    // 获取原始卡牌数据
+    public CardDataSO GetOriginalCardDataByClone(CardDataSO clone)
+    {
+        foreach (var kvp in cardDataClones)
+        {
+            if (kvp.Value.Equals(clone))
+            {
+                return kvp.Key;//这里返回的是原始数据
+            }
+        }
+        return null;
     }
 }

@@ -8,33 +8,35 @@ public class CharacterBase : MonoBehaviour
     public IntVariable defense;
     public IntVariable buffRound;//buffer持续回合数
 
-    // 状态条引用
+    //状态条引用
     public StatusBar statusBar;
 
     public int CurrentHP {get => hp.currentValue; set => hp.SetValue(value);}
     public int MaxHP {get => hp.maxValue; }
     protected Animator animator;
     public bool isDead;
+    public int currentDamage;
 
-    // 用于显示buff和debuff——两个特效，在这里就简化了，正面buffer，负面debuffer分别使用他俩
+    //用于显示buff和debuff——两个特效，在这里就简化了，正面buffer，负面debuffer分别使用他俩
     public GameObject buff;
     public GameObject debuff;
 
     [Header("状态效果")]
-    // 使用字典存储状态及其点数
+    // 使用字典存储状态及其点数——存储的都是副本，不会影响原始数据
     public Dictionary<string, int> statusEffects = new Dictionary<string, int>();
     public List<StatusEffect> activeEffects = new List<StatusEffect>();
 
-    // 力量卡牌有关——增强伤害
+    //强化卡牌有关——增强伤害
     public float baseStrength = 1f;
     public float strengthEffect = 0.5f;
 
-    [SerializeField]private int thornRoundCount = 0; // 荆棘效果的回合计数
+    [SerializeField]public int thornRoundCount = 0; // 荆棘效果的回合计数
     [SerializeField]private bool wasAttackedInThornRound = false; // 荆棘效果期间是否受到攻击
 
     [Header("广播")]
     public ObjectEventSO characterDeadEvent;//角色死亡事件
 
+    public List<Enemy> aliveEnemyList = new List<Enemy>();//存活的敌人列表
 
 
     protected virtual void Awake()
@@ -74,22 +76,67 @@ public class CharacterBase : MonoBehaviour
 
     public virtual void TakeDamage(int damage)
     {
-        var currentDamage = (damage - defense.currentValue) >= 0 ? (damage - defense.currentValue) : 0;
+        currentDamage = (damage - defense.currentValue) >= 0 ? (damage - defense.currentValue) : 0;
         var currentDefense = (damage - defense.currentValue) >= 0 ? 0 : (defense.currentValue - damage);
         defense.SetValue(currentDefense);
         if (CurrentHP > currentDamage)
         {
+            // 处理护盾效果
+            if (statusEffects.ContainsKey("ShieldStatusEffect") && this is Enemy)
+            {
+                EffectTimingManager.Instance.ChangeEffectTiming(EffectTiming.EnemyShield);
+            }
+            else if (statusEffects.ContainsKey("ShieldStatusEffect") && this is Player)
+            {
+                EffectTimingManager.Instance.ChangeEffectTiming(EffectTiming.PlayerShield);
+            }
+
+                // 处理厚皮效果
+            if (statusEffects.ContainsKey("ThickSkinStatusEffect") && this is Enemy)
+            {
+                //currentDamage -= statusEffects["ThickSkinStatusEffect"];
+                EffectTimingManager.Instance.ChangeEffectTiming(EffectTiming.EnemyThickSkin);
+            }
+            else if (statusEffects.ContainsKey("ThickSkinStatusEffect") && this is Player)
+            {
+                EffectTimingManager.Instance.ChangeEffectTiming(EffectTiming.PlayerThickSkin);
+            }
+
             // 当前人物生命值减少,就会自动调用hp的SetValue方法从而触发事件
             CurrentHP -= currentDamage;
             Debug.Log($"CurrentHP: {CurrentHP}");
             animator.SetTrigger("hit");//玩家和敌人受击动画
 
             // 处理荆棘效果
-            if (statusEffects.ContainsKey("ThornStatusEffect"))
+            if (statusEffects.ContainsKey("ThornStatusEffect") && this is Enemy)
             {
-                //int thornDamage = 2 * statusEffects["ThornStatusEffect"];
+                EffectTimingManager.Instance.ChangeEffectTiming(EffectTiming.EnemyThorn);
                 wasAttackedInThornRound = true; // 标记在荆棘效果期间受到攻击
             }
+            else if(statusEffects.ContainsKey("ThornStatusEffect") && this is Player)
+            {
+                EffectTimingManager.Instance.ChangeEffectTiming(EffectTiming.PlayerThorn);
+                wasAttackedInThornRound = true;
+                Debug.Log("玩家荆棘");
+            }
+        }
+        else
+        {
+            CurrentHP = 0;
+            // 当前人物死亡
+            isDead = true;
+            characterDeadEvent.RaiseEvent(this, this);//广播死亡事件
+        }
+    }
+
+    //直接造成伤害，不考虑身上的状态效果
+    public virtual void TakeDamage2(int damage)
+    {
+        if(CurrentHP > damage)
+        {
+            CurrentHP -= damage;
+            Debug.Log($"CurrentHP: {CurrentHP}");
+            animator.SetTrigger("hit");//玩家和敌人受击动画
         }
         else
         {
@@ -126,6 +173,8 @@ public class CharacterBase : MonoBehaviour
         if (statusEffects.ContainsKey(effect.effectName))
         {
             statusEffects[effect.effectName] += effect.value;
+
+            effect.round += 3;//TOOD：偷懒了没有拿到副本对应的原始数据来加回合数
 
             //提前结算荆棘效果并重置回合数——在有荆棘效果时，再次受到荆棘效果时，会提前结算上一次的荆棘效果
             if (effect is ThornStatusEffect)
@@ -169,26 +218,19 @@ public class CharacterBase : MonoBehaviour
         }
     }
 
-    // 清除所有状态效果
+    // 清除所有状态效果——在点击房间加载玩家时调用
     public void ClearAllStatusEffects()
     {
         foreach (var effect in new List<StatusEffect>(activeEffects))
         {
             effect.RemoveEffect(this);
         }
+        //thornRoundCount = 0;//清除荆棘效果的回合数,防止报空
     }
 
     // 执行状态效果
-    public void ExecuteStatusEffects(EffectTiming timing)
-    {
-        foreach (var effect in activeEffects)
-        {
-            if (effect.timing == timing)
-            {
-                effect.ExecuteEffect(this);
-            }
-        }
-    }
+    public virtual void ExecuteStatusEffects(EffectTiming timing) { }
+
 
     // 更新状态条——不需要了，在血条控制部分已经有了
     private void UpdateStatusBar()
@@ -267,7 +309,7 @@ public class CharacterBase : MonoBehaviour
         if (thornRoundCount > 0)
         {
             thornRoundCount--;
-            if (thornRoundCount == 0)
+            if (thornRoundCount == 0 && statusEffects.ContainsKey("ThornStatusEffect"))
             {
                 if (wasAttackedInThornRound)
                 {
@@ -280,4 +322,8 @@ public class CharacterBase : MonoBehaviour
             }
         }
     }
+
+    // 更新状态效果的回合数
+    public virtual void UpdateStatusEffectRounds() { }
+
 }

@@ -8,7 +8,7 @@ public class StrengthEffect : Effect
         switch (targetType)
         {
             case EffectTargetType.Self:
-                from.SetupStrength(value, true);
+                target.SetupStrength(value, true);
                 break;
             case EffectTargetType.Target:
                 target.SetupStrength(value, false);

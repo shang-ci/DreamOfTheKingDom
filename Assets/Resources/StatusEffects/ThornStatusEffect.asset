@@ -15,4 +15,5 @@ MonoBehaviour:
   effectName: ThornStatusEffect
   value: 1
   baseValue: 1
+  round: 3
   timing: 6

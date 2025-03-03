@@ -1,9 +1,14 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 //战斗中的回合管理、是否开启战斗、玩家的显示控制
 public class TurnBaseManager : MonoBehaviour
 {
+    public static TurnBaseManager instance;
+
     public GameObject playerObj;
+    public Player player;
+    public Enemy enemy;
 
     [SerializeField]private bool isPlayerTurn = false;
     private bool isEnemyTurn = false;
@@ -13,10 +18,25 @@ public class TurnBaseManager : MonoBehaviour
     public float enemyTurnDuration;
     public float playerTurnDuration;
 
+    private int playerTurnCount = 0; // 玩家回合计数
+    private int enemyTurnCount = 0; // 敌人回合计数
+
     [Header("事件广播")]
     public ObjectEventSO playerTurnBegin;//玩家回合结束用敌人回合开始代替表示，也可以在这里把抽牌阶段抽取出来
     public ObjectEventSO enemyTurnBegin;
     public ObjectEventSO enemyTurnEnd;
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     private void Update() 
     {
@@ -32,9 +52,7 @@ public class TurnBaseManager : MonoBehaviour
             {
                 timeCounter = 0;
                 // 敌人回合结束
-                EnemyTurnEnd();
-                // 玩家回合开始
-                isPlayerTurn = true;
+                EnemyTurnEnd();               
             }
         }
 
@@ -54,33 +72,50 @@ public class TurnBaseManager : MonoBehaviour
     [ContextMenu("Game Start")]
     public void GameStart()
     {
+        playerObj.GetComponent<Player>().ClearAllStatusEffects();//清除玩家身上的所有状态
+        player = playerObj.GetComponent<Player>();
+        enemy = (Enemy)GameManager.Instance.GetSingleOrMultipleEnemies();//TOOD：这里返回的敌人可以是多个，所以不能只用Enemy类型接收，以后要改成Enemy[]
+
         isPlayerTurn = true;
         isEnemyTurn = false;
         battleEnd = false;
         timeCounter = 0;
+        playerTurnCount = 0;
+        enemyTurnCount = 0;
 
-        playerObj.GetComponent<Player>().ClearAllStatusEffects();//清除玩家身上的所有状态
+        //测试代码——强化卡还原移除强化效果
+        //List<CardDataSO> attackCards = CardDeck.instance.GetAllCardDataByName("攻击");
+        //foreach (var cardData in attackCards)
+        //{
+        //    Debug.Log(cardData.description);
+        //}
     }
 
     public void PlayerTurnBegin()
     {
+        playerTurnCount++;
         playerTurnBegin.RaiseEvent(null, this);
+        player.UpdateStatusEffectRounds();//更新玩家状态效果回合数
     }
 
+    //玩家回合结束调用——当点击回合转换按钮时玩家回合结束
     public void EnemyTurnBegin()
     {
+        enemyTurnCount++;
         isEnemyTurn = true;
         enemyTurnBegin.RaiseEvent(null, this);
+        enemy.UpdateStatusEffectRounds();//更新敌人状态效果回合数
     }
 
     public void EnemyTurnEnd()
     {
         isEnemyTurn = false;
         enemyTurnEnd.RaiseEvent(null, this);
+        isPlayerTurn = true;
     }
 
     //控制玩家的显示&&游戏开始——在点击房间时判断房间类型调用
-    public void OnRoomLoadedEvent(object obj)
+    public void AfterRoomLoadedEvent(object obj)
     {
         Room room = obj as Room;
         switch (room.roomData.roomType)

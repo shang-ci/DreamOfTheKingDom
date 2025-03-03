@@ -16,12 +16,13 @@ public class DamageEffect : Effect
                 var damage = (int) math.round(value * from.baseStrength);//四舍五入计算伤害
                 target.TakeDamage(damage);
 
-                if(target.statusEffects.ContainsKey("ThornStatusEffect"))
-                {
-                    //荆棘效果
-                    //from.TakeDamage((int)math.round(target.statusEffects["ThornStatusEffect"] * from.baseStrength));
-                    from.TakeDamage(target.statusEffects["ThornStatusEffect"]);//根据身上的荆棘点数决定反伤的伤害
-                }
+                //TOOD:这里的判断不好，因该在卡牌拖动时判断卡牌/carddata的相关类型再触发
+                if (target is Enemy && target.statusEffects.ContainsKey("CrimsonMarkStatusEffect"))
+                    EffectTimingManager.Instance.ChangeEffectTiming(EffectTiming.EnemyCrimsonMark);
+
+                if (target is Player && target.statusEffects.ContainsKey("CrimsonMarkStatusEffect"))
+                    EffectTimingManager.Instance.ChangeEffectTiming(EffectTiming.PlayerCrimsonMark);
+
 
                 Debug.Log($"执行了{damage}点伤害!");
                 break;

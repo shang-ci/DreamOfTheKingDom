@@ -14,6 +14,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actions:
   - intentSprite: {fileID: 21300000, guid: a34550cedb3234dc085a67e7fb9bf5c8, type: 3}
+    effect: {fileID: 11400000, guid: 5746fb2cfe7f573448a3212325efdb33, type: 2}
+    probability: 100
+    accuracy: 0.5
+    criticalRate: 1.5
+    originalValue: 6
+  - intentSprite: {fileID: 21300000, guid: 86046fdda5d83b04699c5386bbcf4bba, type: 3}
+    effect: {fileID: 11400000, guid: 693518ebf27a654429756aabc2447485, type: 2}
+    probability: 2
+    accuracy: 0
+    criticalRate: 0
+    originalValue: 15
+  - intentSprite: {fileID: 21300000, guid: 98d622e3aaa3e464a933a2720153fdae, type: 3}
+    effect: {fileID: 11400000, guid: cb65d01653b98c84d894f4f4acf922e6, type: 2}
+    probability: 3
+    accuracy: 0
+    criticalRate: 0
+    originalValue: 10
+  - intentSprite: {fileID: 21300000, guid: e60462361db3140c59c13b7122a2106c, type: 3}
     effect: {fileID: 11400000, guid: 4d45ea67ec9941b458694ae30ed53176, type: 2}
-  - intentSprite: {fileID: 21300000, guid: a34550cedb3234dc085a67e7fb9bf5c8, type: 3}
-    effect: {fileID: 11400000, guid: 4d45ea67ec9941b458694ae30ed53176, type: 2}
+    probability: 3
+    accuracy: 0
+    criticalRate: 0
+    originalValue: 10

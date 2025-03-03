@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using static UnityEngine.GraphicsBuffer;
 
 // 卡牌拖拽处理器
 public class CardDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
@@ -8,7 +9,7 @@ public class CardDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     public GameObject arrowPrefab;
     private GameObject currentArrow;
 
-    private Card currentCard;
+    public Card currentCard;
     private bool canMove;//是否可以拖拽，当尝试拖拽时，如果卡牌是攻击类型，就会生成箭头，如果是技能或能力类型，就可以拖拽
     private bool canExecute;//是否可以执行，当拖拽结束时，如果鼠标在敌人上，就可以执行；如果是针对玩家自己的技能或能力，只要超过1f就可以执行，就是说只要拖拽到屏幕上方y轴大于1f就可以执行
     private CharacterBase targetCharacter;
@@ -46,6 +47,7 @@ public class CardDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, I
         }
     }
 
+    //根据effect/statusEffect的效果类型，来确定effect实施的目标
     public void OnDrag(PointerEventData eventData)
     {
         if (!currentCard.isAvailiable)
@@ -62,6 +64,56 @@ public class CardDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, I
             Vector3 screenPos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f);
             Vector3 worldPos = Camera.main.ScreenToWorldPoint(screenPos);
             currentCard.transform.position = worldPos;
+
+            //根据卡牌的效果类型，来确定effect实施的目标
+            if(currentCard.cardData.effects != null)
+            {
+                foreach (var effect in currentCard.cardData.effects)
+                {
+                    switch (effect.targetType)
+                    {
+                        case EffectTargetType.Self:
+                            targetCharacter = currentCard.player;
+                            break;
+                        case EffectTargetType.Target:
+                            // 这里可以添加逻辑来选择一个特定的目标，例如通过点击选择敌人
+                            targetCharacter = (CharacterBase)GameManager.Instance.GetSingleOrMultipleEnemies();
+                            break;
+                        case EffectTargetType.ALL:
+                            // 这里可以添加逻辑来选择所有目标，例如对所有敌人造成伤害
+                            //targetCharacter = GameManager.Instance.GetAllEnemies();
+                            //TOOD:敌人会有多个，接受多个目标
+                            break;
+                        case EffectTargetType.Our:
+                            break;
+                    }
+                }
+            }
+
+            if(currentCard.cardData.statusEffects != null)
+            {
+                foreach (var statusEffect in currentCard.cardData.statusEffects)
+                {
+                    switch (statusEffect.targetType)
+                    {
+                        case StatusEffectTargetType.Self:
+                            targetCharacter = currentCard.player;
+                            break;
+                        case StatusEffectTargetType.Target:
+                            // 这里可以添加逻辑来选择一个特定的目标，例如通过点击选择敌人
+                            targetCharacter = (CharacterBase)GameManager.Instance.GetSingleOrMultipleEnemies();
+                            break;
+                        case StatusEffectTargetType.ALL:
+                            // 这里可以添加逻辑来选择所有目标，例如对所有敌人造成伤害
+                            //targetCharacter = GameManager.Instance.GetAllEnemies();
+                            //TOOD:敌人会有多个，接受多个目标
+                            targetCharacter = null;
+                            break;
+                        case StatusEffectTargetType.Our:
+                            break;
+                    }
+                }
+            }
 
             //当拖拽到屏幕上方y大于1f，就可以执行
             canExecute = worldPos.y > 1f;
@@ -108,5 +160,11 @@ public class CardDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, I
             currentCard.ResetCardTransform();
             currentCard.isAnimating = false;//拖拽结束后，若是回到原位卡牌仍旧可以上提
         }
+    }
+
+    //获取当前拖拽的卡牌
+    public Card GetCurrentDraggedCard()
+    {
+        return currentCard;
     }
 }

@@ -15,4 +15,5 @@ MonoBehaviour:
   effectName: ResearchEffect
   value: 2
   baseValue: 2
+  round: 2
   timing: 0

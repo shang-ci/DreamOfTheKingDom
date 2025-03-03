@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardName: "\u82F9\u679C"
   cardImage: {fileID: 21300000, guid: 8e1f416c7d68f5f4494ad45eee82af26, type: 3}
-  cost: 2
+  cost: 1
   cardType: 2
   description: "\u6062\u590D\u751F\u547D\u503C <color=\"white\">5</color> \u70B9"
   effects:
   - {fileID: 11400000, guid: 2f145035ad288df44874d80c4e629303, type: 2}
+  statusEffects: []

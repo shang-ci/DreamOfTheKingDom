@@ -12,9 +12,9 @@ public class StrengthenStatusEffect : StatusEffect
         EffectTimingManager.Instance.ChangeEffectTiming(EffectTiming.Strengthen);
     }
 
-    public override void ExecuteEffect(CharacterBase character)
+    public override void ExecuteEffect(CharacterBase from, CharacterBase target)
     {
-        // 获取当前卡牌库中的所有攻击卡牌
+        // 获取当前这次对局里所有攻击卡牌
         List<CardDataSO> attackCards = CardDeck.instance.GetAllCardDataByName("攻击");
 
         // 增加攻击卡牌的伤害值
@@ -30,8 +30,16 @@ public class StrengthenStatusEffect : StatusEffect
                     cardData.description = "对目标造成" + t + "点伤害";
                 }
             }
-            //只需要更新手牌中的卡牌UI
-            CardDeck.instance.handCardObjectList.Find(card => card.cardData == cardData).Init(cardData);
+
+            // 更新手牌中的卡牌数据UI
+            //var card = CardDeck.instance.handCardObjectList.Find(c => c.cardData == cardData);//这两个carddata都是同一个data的副本——find比较的是两者的引用地址 
+            var card = CardDeck.instance.handCardObjectList.Find(c => c.cardData.Equals(cardData));
+            //Debug.Log("强化——找到攻击卡了");
+            if (card != null)
+            {
+                card.UpdateCardDataUI(cardData);
+                Debug.Log("强化——副本UI更新");
+            }
         }
     }
 
@@ -42,25 +50,42 @@ public class StrengthenStatusEffect : StatusEffect
 
     public override void RemoveEffect(CharacterBase character)
     {
+        List<CardDataSO> strengthStatusCards = CardDeck.instance.GetAllCardDataByName("强化");
+        
+
+        foreach (var cardData in strengthStatusCards)
+        {
+            var originalStatusEffect = CardManager.Instance.GetOriginalCardDataByClone(cardData);
+            foreach (var effect in cardData.statusEffects)
+            {
+                if (effect is StrengthenStatusEffect)
+                {
+                    effect.round = originalStatusEffect.statusEffects[0].round;
+                }
+            }
+        }
+
         List<CardDataSO> attackCards = CardDeck.instance.GetAllCardDataByName("攻击");
 
-        // 还原攻击卡的伤害值
         foreach (var cardData in attackCards)
         {
+            var originalCardData = CardManager.Instance.GetOriginalCardDataByClone(cardData);
+
             foreach (var effect in cardData.effects)
             {
                 if (effect is DamageEffect)
                 {
-                    effect.value = 6;
+                    effect.value = originalCardData.effects[0].value;
 
-                    cardData.description = "对目标造成6点伤害";
+                    cardData.description = originalCardData.description;
                 }
             }
 
-            var card = CardDeck.instance.handCardObjectList.Find(c => c.cardData == cardData);
+            // 更新手牌中的卡牌数据UI
+            var card = CardDeck.instance.handCardObjectList.Find(c => c.cardData.Equals(originalCardData));
             if (card != null)
             {
-                card.Init(cardData);
+                card.UpdateCardDataUI(originalCardData);
             }
         }
 

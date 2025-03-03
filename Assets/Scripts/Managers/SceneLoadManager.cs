@@ -27,7 +27,7 @@ public class SceneLoadManager : MonoBehaviour
     }
 
     /// <summary>
-    /// 在房间加载事件中监听
+    /// 在房间加载事件中监听——点击房间时触发
     /// </summary>
     /// <param name="data"></param>
     public async void OnLoadRoomEvent(object data)

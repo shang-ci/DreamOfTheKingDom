@@ -45,24 +45,58 @@ public enum EffectType
     Shield//护盾
 }
 
-
+//effect的类型
 public enum EffectTargetType
 {
     Self,
     Target,
     ALL,
+    Our,
 }
+
+public enum StatusEffectTargetType
+{
+    Self,//自己
+    Target,//单个敌人
+    ALL,//所有敌人
+    Our,//我们
+}
+
+
 
 //触发时机
 public enum EffectTiming
 {
     Reseach,//研究卡牌打出触发研究这一时机
     Strengthen,//强化卡牌打出触发强化这一时机
-    OnTurnStart,
-    OnTurnEnd,
-    OnDamageTaken,
-    OnDamageDealt,
+    OnPlayerTurn,//玩家回合
+    OnEnemyTurn,//敌人回合
+    OnDamagePlayer,//玩家受伤
+    OnDamageEnemy,//敌人受伤
+    PlayerThorn,//玩家荆棘
+    EnemyThorn,//敌人荆棘
     Thorn,//荆棘
+    ThickSkin,//厚皮
+    PlayerThickSkin,//玩家厚皮
+    EnemyThickSkin,//敌人厚皮
+    Shield,//护盾
+    EnemyShield,//敌人护盾
+    PlayerShield,//玩家护盾
+    CrimsonMark,//猩红印记
+    PlayerCrimsonMark,//玩家猩红印记
+    EnemyCrimsonMark,//敌人猩红印记
     None
     // 添加其他执行时机
 }
+
+//属性
+public enum Attribute
+{
+    gold,
+    wood,
+    water,
+    fire,
+    earth
+}
+
+

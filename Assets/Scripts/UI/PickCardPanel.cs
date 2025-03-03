@@ -32,7 +32,7 @@ public class PickCardPanel : MonoBehaviour
         for (int i = 0; i < 3; i++)
         {
             var card = cardTemplate.Instantiate();
-            var data = cardManager.GetNewCardData();//获得新的卡牌数据
+            var data = cardManager.GetNewCardData();//获得新的卡牌数据——原版数据
 
             // 填充卡牌数据到卡牌模板中
             InitCard(card, data);
@@ -48,7 +48,7 @@ public class PickCardPanel : MonoBehaviour
     //点击确认按钮时，解锁卡牌——广播，关闭抽卡面板、隐藏抽卡按钮
     private void OnConfirmButtonClicked()
     {
-        cardManager.UnlockCard(currentCardData);//解锁卡牌
+        cardManager.UnlockCard(currentCardData);//解锁卡牌——原版数据
         finishPickCardEvent.RaiseEvent(null, this);
     }
 

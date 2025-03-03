@@ -729,6 +729,7 @@ GameObject:
   - component: {fileID: 626886603}
   - component: {fileID: 626886604}
   - component: {fileID: 626886605}
+  - component: {fileID: 626886606}
   m_Layer: 0
   m_Name: CardDeck
   m_TagString: Untagged
@@ -930,6 +931,34 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: CardDeck, Assembly-CSharp
         m_MethodName: ReleaseAllCards
         m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &626886606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 626886597}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 543c7eb0f99cb9d42820de181b9de996, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventSO: {fileID: 11400000, guid: 4f29e300ec8ab3d49883e685e218f530, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 626886599}
+        m_TargetAssemblyTypeName: CardDeck, Assembly-CSharp
+        m_MethodName: DiscardRandomCard
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1191,6 +1220,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mapLayout: {fileID: 11400000, guid: 8369fcc6edb00604790a69908a74d8d3, type: 2}
   aliveEnemyList: []
+  player: {fileID: 0}
   gameWinEvent: {fileID: 11400000, guid: d0e1b4b8bcc770548b6a8d6af8358f51, type: 2}
   gameOverEvent: {fileID: 11400000, guid: d15647e59613b26438757ea3a973e806, type: 2}
 --- !u!114 &806605661
@@ -1269,6 +1299,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: OnRoomLoadedEvent
         m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 806605660}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: ResetEnemyActions
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1500,6 +1542,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerObj: {fileID: 1989376670}
+  player: {fileID: 0}
+  enemy: {fileID: 0}
   isPlayerTurn: 0
   battleEnd: 1
   enemyTurnDuration: 2.5
@@ -1568,7 +1612,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1244578818}
         m_TargetAssemblyTypeName: TurnBaseManager, Assembly-CSharp
-        m_MethodName: OnRoomLoadedEvent
+        m_MethodName: AfterRoomLoadedEvent
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2816,11 +2860,16 @@ MonoBehaviour:
   buffRound: {fileID: 11400000, guid: e495b9e3802646440bdf674d84206c99, type: 2}
   statusBar: {fileID: 0}
   isDead: 0
+  currentDamage: 0
   buff: {fileID: 1380851434}
   debuff: {fileID: 634801401}
+  activeEffects: []
   baseStrength: 1
   strengthEffect: 0.5
+  thornRoundCount: 0
+  wasAttackedInThornRound: 0
   characterDeadEvent: {fileID: 11400000, guid: 5c3b29e6903d10e4b8d8cbd39bdc35a3, type: 2}
+  aliveEnemyList: []
   playerMana: {fileID: 11400000, guid: 71545682b03886c419e837171a9f845f, type: 2}
   maxMana: 3
 --- !u!114 &1989376673

@@ -14,4 +14,8 @@ public struct EnemyAction
 {
     public Sprite intentSprite;
     public Effect effect;
+    public float probability; //触发率
+    public float accuracy; //精准率
+    public float criticalRate; //暴击率
+    public int originalValue; //原始值
 }

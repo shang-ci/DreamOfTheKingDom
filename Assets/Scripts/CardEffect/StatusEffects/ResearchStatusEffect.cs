@@ -14,13 +14,13 @@ public class ResearchStatusEffect : StatusEffect
         EffectTimingManager.Instance.ChangeEffectTiming(EffectTiming.Reseach);
     }
 
-    public override void ExecuteEffect(CharacterBase character)
+    public override void ExecuteEffect(CharacterBase from, CharacterBase target)
     {
         // 获取当前卡牌库中的所有强化卡
         List<CardDataSO> strengthenCards = CardDeck.instance.GetAllCardDataByName("强化");
 
         // 获取角色身上的研究状态的点数
-        int researchValue = character.GetStatusEffectValue(effectName);
+        int researchValue = from.GetStatusEffectValue(effectName);
 
         // 将研究状态的点数加到每张强化卡的 value 上
         foreach (var cardData in strengthenCards)
@@ -38,40 +38,58 @@ public class ResearchStatusEffect : StatusEffect
 
             // 只需要更新手牌中的卡牌UI
             var card = CardDeck.instance.handCardObjectList.Find(c => c.cardData == cardData);
-
+            Debug.Log("研究——找到强化卡了");
             //防止报空异常
             if (card != null)
             {
-                card.Init(cardData);
+                card.UpdateCardDataUI(cardData);
+                Debug.Log("研究——副本UI更新");
             }
         }
     }
 
     public override void RemoveEffect(CharacterBase character)
     {
+        List<CardDataSO> strengthStatusCards = CardDeck.instance.GetAllCardDataByName("研究");
+
+
+        foreach (var cardData in strengthStatusCards)
+        {
+            var originalStatusEffect = CardManager.Instance.GetOriginalCardDataByClone(cardData);
+            foreach (var effect in cardData.statusEffects)
+            {
+                if (effect is ResearchStatusEffect)
+                {
+                    effect.round = originalStatusEffect.statusEffects[0].round;
+                }
+            }
+        }
+
         // 获取当前卡牌库中的所有强化卡
         List<CardDataSO> strengthenCards = CardDeck.instance.GetAllCardDataByName("强化");
 
         // 还原强化卡的伤害值
         foreach (var cardData in strengthenCards)
         {
+            var originalCardData = CardManager.Instance.GetOriginalCardDataByClone(cardData);
+
             foreach (var effect in cardData.statusEffects)
             {
                 if (effect is StrengthenStatusEffect)
                 {
-                    effect.value = 2;
+                    effect.value = originalCardData.statusEffects[0].value;
 
-                    cardData.description = "增加攻击" + effect.value + "点";
+                    cardData.description = originalCardData.description;
                 }
             }
 
             // 只需要更新手牌中的卡牌UI
-            var card = CardDeck.instance.handCardObjectList.Find(c => c.cardData == cardData);
+            var card = CardDeck.instance.handCardObjectList.Find(c => c.Equals(originalCardData));
 
             //防止报空异常
             if (card != null)
             {
-                card.Init(cardData);
+                card.UpdateCardDataUI(cardData);
             }
         }
 

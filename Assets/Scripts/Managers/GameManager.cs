@@ -4,14 +4,30 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager Instance;
+
     [Header("地图布局")]
     public MapLayoutSO mapLayout;//保存的地图布局数据——房间信息
 
     public List<Enemy> aliveEnemyList = new List<Enemy>();//存活的敌人列表——表示可以有多个敌人——在点击进入时先清空再读取填充
+    public Player player;
 
     [Header("事件通知")]//事件通知，当游戏胜利或失败时调用
     public ObjectEventSO gameWinEvent;
     public ObjectEventSO gameOverEvent;
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     //加载地图时调用，清空存活的敌人列表，也就是——点击back时调用||newgame时调用
     // 加载地图，把当前房间设置为已访问状态，把相邻房间设置为锁定状态，把当前房间后面的房间设置为可访问状态
@@ -63,6 +79,7 @@ public class GameManager : MonoBehaviour
         {
             aliveEnemyList.Add(enemy);
         }
+        CardDeck.instance.InitializeDeck();//初始化抽牌堆
     }
 
     //角色死亡，当有角色死亡时调用，判断是玩家死亡还是敌人死亡，发出对应的通知更改游戏状态
@@ -89,6 +106,8 @@ public class GameManager : MonoBehaviour
                 StartCoroutine(EventDelayAction(gameWinEvent));
             }
         }
+
+        //ResetEnemyActions();
     }
 
     //希望在游戏结束时，延迟一段时间再发出通知
@@ -103,5 +122,33 @@ public class GameManager : MonoBehaviour
     {
         mapLayout.mapRoomDataList.Clear();
         mapLayout.linePositionList.Clear();
+    }
+
+    //还原对局里所有敌人的effect数据——在加载房间后调用——因为敌人的actionDataSO是同一个所以可以在下一次战斗时对该敌人的effect数据进行还原
+    public void ResetEnemyActions()
+    {
+        foreach (var enemy in aliveEnemyList)
+        {
+            foreach (var action in enemy.actionDataSO.actions)
+            {
+                action.effect.value = action.originalValue;
+                Debug.Log("ResetEnemyActions");
+            }
+        }
+    }
+
+    //获取场景中的敌人对象
+    public object GetSingleOrMultipleEnemies()
+    {
+        if (aliveEnemyList.Count == 1)
+        {
+            return aliveEnemyList[0];
+        }
+        return aliveEnemyList;
+    }
+
+    public List<Enemy> GetAllEnemies()
+    {
+        return aliveEnemyList; // 返回所有敌人的集合
     }
 }

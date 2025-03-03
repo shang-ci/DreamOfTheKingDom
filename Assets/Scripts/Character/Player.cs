@@ -4,9 +4,18 @@ public class Player : CharacterBase
 {
     public IntVariable playerMana;
     public int maxMana;
+    public int CurrentMana {get => playerMana.currentValue;set => playerMana.SetValue(value); }//这个current类的数值就是为了方便事件广播，更新UI状态，和currenthap类似
 
-    //这个current类的数值就是为了方便事件广播，更新UI状态，和currenthap类似
-    public int CurrentMana {get => playerMana.currentValue;set => playerMana.SetValue(value);}
+    [Header("成长系统")]
+    public GrowthSystem growthSystem;
+
+
+    protected override void Start()
+    {
+        base.Start();
+
+        growthSystem = new GrowthSystem();
+    }
 
     private void OnEnable() 
     {
@@ -42,4 +51,48 @@ public class Player : CharacterBase
         buffRound.currentValue = buffRound.maxValue;//防止上一局的buffer影响到这一局
         newTurn();//重置法力值
     }
+
+    //执行玩家的状态效果
+    public override void ExecuteStatusEffects(EffectTiming timing)
+    {
+        base.ExecuteStatusEffects(timing); 
+
+        foreach (var effect in activeEffects)
+        {
+            if (effect.timing == timing)
+            {
+                effect.ExecuteEffect(this, (CharacterBase)GameManager.Instance.GetSingleOrMultipleEnemies());
+            }
+        }
+    }
+
+
+    //集合遍历时被修改会触发InvalidOperationException异常，所以这里使用for循环/先记录要删除的元素后面再foreach删除
+    //玩家状态效果回合数更新——这里就不用事件来调用了，要是敌人数量很多那岂不是要给每个敌人都添加一个事件监听太费事了
+    //public override void UpdateStatusEffectRounds()
+    //{
+    //    base.UpdateStatusEffectRounds();
+    //    foreach (var statusEffect in activeEffects)
+    //    {
+    //        statusEffect.round--;
+    //        if (statusEffect.round <= 0)
+    //        {
+    //            statusEffect.RemoveEffect(this);
+    //        }
+    //    }
+    //}
+    public override void UpdateStatusEffectRounds()
+    {
+        base.UpdateStatusEffectRounds();
+        for (int i = activeEffects.Count - 1; i >= 0; i--)
+        {
+            StatusEffect statusEffect = activeEffects[i];
+            statusEffect.round--;
+            if (statusEffect.round <= 0)
+            {
+                statusEffect.RemoveEffect(this);
+            }
+        }
+    }
 }
+

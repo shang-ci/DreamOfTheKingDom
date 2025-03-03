@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abf30631149f61d46a2cd8c5ab978227, type: 3}
+  m_Name: "\u6D41\u661F\u5760\u706B"
+  m_EditorClassIdentifier: 
+  cardName: FallingMeteorEffect
+  cardImage: {fileID: 21300000, guid: ea97180bae5acd74eadc533c4a31ba79, type: 3}
+  cost: 1
+  cardType: 0
+  description: "\u5BF9\u76EE\u6807\u9020\u6210 <color=\"white\">1</color> \u70B9\u4F24\u5BB3<color=\"white\">10</color>\u6B21"
+  effects:
+  - {fileID: 11400000, guid: eecc2d04a5dc948439bbd4a884e4330a, type: 2}
+  statusEffects: []

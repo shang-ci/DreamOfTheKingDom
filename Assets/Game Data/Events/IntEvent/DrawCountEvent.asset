@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bad1de00f70600419e7a74366357b30, type: 3}
   m_Name: DrawCountEvent
   m_EditorClassIdentifier: 
-  description: 
+  description: "\u62BD\u724C\u4E8B\u4EF6"
   lastSender: 

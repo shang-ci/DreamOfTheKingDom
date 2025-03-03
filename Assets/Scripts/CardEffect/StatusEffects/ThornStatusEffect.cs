@@ -10,14 +10,29 @@ public class ThornStatusEffect : StatusEffect
         // 荆棘效果不需要在特定时间点触发
     }
 
-    public override void ExecuteEffect(CharacterBase character)
+    //不受厚皮等的影响——直接输出伤害
+    public override void ExecuteEffect(CharacterBase from, CharacterBase target)
     {
-        // 荆棘效果在受到伤害时触发
-        //character.TakeDamage(value);
+        target.TakeDamage2(from.statusEffects["ThornStatusEffect"]);
     }
 
     public override void RemoveEffect(CharacterBase character)
     {
+        List<CardDataSO> strengthStatusCards = CardDeck.instance.GetAllCardDataByName("荆棘");
+
+
+        foreach (var cardData in strengthStatusCards)
+        {
+            var originalStatusEffect = CardManager.Instance.GetOriginalCardDataByClone(cardData);
+            foreach (var effect in cardData.statusEffects)
+            {
+                if (effect is ThornStatusEffect)
+                {
+                    effect.round = originalStatusEffect.statusEffects[0].round;
+                }
+            }
+        }
+        character.thornRoundCount = 0;
         // 移除荆棘效果
         character.RemoveStatusEffect(effectName);
     }

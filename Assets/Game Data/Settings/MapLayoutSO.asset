@@ -18,102 +18,100 @@ MonoBehaviour:
     column: 0
     line: 0
     roomType: 1
-    roomState: 2
+    roomState: 0
     linkTo:
     - {x: 1, y: 0}
+    - {x: 1, y: 1}
   - posX: -9.666667
     posY: -2
     column: 0
     line: 1
     roomType: 1
-    roomState: 2
+    roomState: 1
     linkTo:
-    - {x: 1, y: 1}
-  - posX: -6.726458
-    posY: 2
-    column: 1
-    line: 0
-    roomType: 2
-    roomState: 0
-    linkTo:
-    - {x: 2, y: 0}
-    - {x: 2, y: 1}
-  - posX: -6.01846
-    posY: -2
-    column: 1
-    line: 1
-    roomType: 2
-    roomState: 0
-    linkTo:
-    - {x: 2, y: 0}
-    - {x: 2, y: 2}
-  - posX: -2.6350174
+    - {x: 1, y: 2}
+  - posX: -6.8674564
     posY: 3
-    column: 2
+    column: 1
     line: 0
-    roomType: 4
+    roomType: 2
     roomState: 0
     linkTo:
-    - {x: 3, y: 1}
-  - posX: -3.685809
+    - {x: 2, y: 0}
+  - posX: -5.6634245
     posY: 0
-    column: 2
+    column: 1
     line: 1
+    roomType: 2
+    roomState: 0
+    linkTo:
+    - {x: 2, y: 1}
+  - posX: -7.0331235
+    posY: -3
+    column: 1
+    line: 2
+    roomType: 1
+    roomState: 1
+    linkTo:
+    - {x: 2, y: 1}
+  - posX: -3.1200564
+    posY: 2
+    column: 2
+    line: 0
     roomType: 16
     roomState: 0
     linkTo:
-    - {x: 3, y: 2}
     - {x: 3, y: 0}
-  - posX: -3.3705218
-    posY: -3
+  - posX: -2.979091
+    posY: -2
     column: 2
-    line: 2
-    roomType: 4
-    roomState: 0
+    line: 1
+    roomType: 2
+    roomState: 1
     linkTo:
+    - {x: 3, y: 2}
     - {x: 3, y: 1}
-  - posX: -0.89925486
+  - posX: -0.49693558
     posY: 3
     column: 3
     line: 0
-    roomType: 8
-    roomState: 0
-    linkTo:
-    - {x: 4, y: 2}
-    - {x: 4, y: 0}
-  - posX: 0.23197806
-    posY: 0
-    column: 3
-    line: 1
-    roomType: 4
-    roomState: 0
-    linkTo:
-    - {x: 4, y: 2}
-  - posX: -0.59054446
-    posY: -3
-    column: 3
-    line: 2
     roomType: 4
     roomState: 0
     linkTo:
     - {x: 4, y: 1}
-  - posX: 2.5202098
+  - posX: 0.40105307
+    posY: 0
+    column: 3
+    line: 1
+    roomType: 8
+    roomState: 2
+    linkTo:
+    - {x: 4, y: 2}
+  - posX: -0.20353445
+    posY: -3
+    column: 3
+    line: 2
+    roomType: 16
+    roomState: 2
+    linkTo:
+    - {x: 4, y: 0}
+  - posX: 3.377368
     posY: 3
     column: 4
     line: 0
     roomType: 4
     roomState: 0
     linkTo:
-    - {x: 5, y: 0}
-  - posX: 2.4557633
+    - {x: 5, y: 1}
+  - posX: 2.4049711
     posY: 0
     column: 4
     line: 1
-    roomType: 2
+    roomType: 4
     roomState: 0
     linkTo:
-    - {x: 5, y: 0}
-  - posX: 2.876479
+    - {x: 5, y: 1}
+  - posX: 2.152175
     posY: -3
     column: 4
     line: 2
@@ -121,8 +119,7 @@ MonoBehaviour:
     roomState: 0
     linkTo:
     - {x: 5, y: 0}
-    - {x: 5, y: 1}
-  - posX: 5.66861
+  - posX: 5.1285915
     posY: 2
     column: 5
     line: 0
@@ -130,7 +127,7 @@ MonoBehaviour:
     roomState: 0
     linkTo:
     - {x: 6, y: 0}
-  - posX: 5.6844373
+  - posX: 5.100831
     posY: -2
     column: 5
     line: 1
