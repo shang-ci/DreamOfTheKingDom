@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class CharacterBase : MonoBehaviour
 {
@@ -8,9 +9,9 @@ public class CharacterBase : MonoBehaviour
     public IntVariable defense;
     public IntVariable buffRound;//buffer持续回合数
 
-    //状态条引用
-    public StatusBar statusBar;
-
+    
+    public StatusBar statusBar;//状态条引用
+    public CharacterInfoPanel characterInfoPanel;//角色信息面板引用
     public int CurrentHP {get => hp.currentValue; set => hp.SetValue(value);}
     public int MaxHP {get => hp.maxValue; }
     protected Animator animator;
@@ -35,8 +36,6 @@ public class CharacterBase : MonoBehaviour
 
     [Header("广播")]
     public ObjectEventSO characterDeadEvent;//角色死亡事件
-
-    public List<Enemy> aliveEnemyList = new List<Enemy>();//存活的敌人列表
 
 
     protected virtual void Awake()
@@ -163,6 +162,14 @@ public class CharacterBase : MonoBehaviour
         CurrentHP += amount;
         CurrentHP = Mathf.Min(CurrentHP, MaxHP);
         buff.SetActive(true);
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if (eventData.button == PointerEventData.InputButton.Right)
+        {
+            characterInfoPanel.ShowCharacterInfo(this);
+        }
     }
 
 

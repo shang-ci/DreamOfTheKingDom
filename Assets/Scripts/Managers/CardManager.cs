@@ -25,6 +25,7 @@ public class CardManager : MonoBehaviour
 
     // 管理卡牌数据副本的字典
     [SerializeField]private Dictionary<CardDataSO, CardDataSO> cardDataClones = new Dictionary<CardDataSO, CardDataSO>();
+    public GameObject cardPrefab;
 
     private void Awake() 
     {
@@ -244,5 +245,12 @@ public class CardManager : MonoBehaviour
             }
         }
         return null;
+    }
+
+    public void CreateCard(CardDataSO cardData)
+    {
+        GameObject cardObject = Instantiate(cardPrefab);
+        Card card = cardObject.GetComponent<Card>();
+        card.Init(cardData);
     }
 }
