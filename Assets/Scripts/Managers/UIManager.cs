@@ -8,6 +8,7 @@ public class UIManager : MonoBehaviour
     public GameObject gameOverPanel;
     public GameObject pickCardPanel;
     public GameObject restRoomPanel;
+    public GameObject characetPanel;
 
     //选择激活对应面板——再点击room事件时根据房间类型，激活不同面板
     public void OnLoadRoomEvent(object data)

@@ -1545,6 +1545,7 @@ GameObject:
   - component: {fileID: 2268096607654448528}
   - component: {fileID: 5137040392054394621}
   - component: {fileID: -1963667835347440377}
+  - component: {fileID: 8492919115620285879}
   m_Layer: 6
   m_Name: Card
   m_TagString: Untagged
@@ -1644,6 +1645,7 @@ MonoBehaviour:
   typeText: {fileID: 8877354752604677180}
   cardName: {fileID: 5370919123544127170}
   cardData: {fileID: 0}
+  originalCardData: {fileID: 0}
   originalPosition: {x: 0, y: 0, z: 0}
   originalRotation: {x: 0, y: 0, z: 0, w: 0}
   originalLayerOrder: 0
@@ -1665,6 +1667,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   arrowPrefab: {fileID: 8509057604314284421, guid: 82710b99e4df21c4f8e5b89b506d3055, type: 3}
+  currentCard: {fileID: 0}
 --- !u!114 &-1963667835347440377
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1693,3 +1696,11 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!222 &8492919115620285879
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9082819943553927571}
+  m_CullTransparentMesh: 1

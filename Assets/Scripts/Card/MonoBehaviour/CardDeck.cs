@@ -13,7 +13,7 @@ public class CardDeck : MonoBehaviour
     public Vector3 deckPosition;//抽出来的卡牌的位置的初始位置
 
     // 抽牌堆
-    [SerializeField]private List<CardDataSO> drawDeck = new List<CardDataSO>();
+    [SerializeField] public List<CardDataSO> drawDeck = new List<CardDataSO>();
     // 弃牌堆
     private List<CardDataSO> discardDeck = new List<CardDataSO>();
     // 当前手牌（每回合）

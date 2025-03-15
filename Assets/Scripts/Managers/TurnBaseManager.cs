@@ -74,6 +74,7 @@ public class TurnBaseManager : MonoBehaviour
     {
         playerObj.GetComponent<Player>().ClearAllStatusEffects();//清除玩家身上的所有状态
         player = playerObj.GetComponent<Player>();
+        player.deck = CardDeck.instance.drawDeck;//这里能保证player的deck每次都是最新的
         enemy = (Enemy)GameManager.Instance.GetSingleOrMultipleEnemies();//TOOD：这里返回的敌人可以是多个，所以不能只用Enemy类型接收，以后要改成Enemy[]
 
         isPlayerTurn = true;

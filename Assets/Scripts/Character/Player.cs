@@ -1,3 +1,5 @@
+using NUnit.Framework;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : CharacterBase
@@ -5,7 +7,7 @@ public class Player : CharacterBase
     public IntVariable playerMana;
     public int maxMana;
     public int CurrentMana {get => playerMana.currentValue;set => playerMana.SetValue(value); }//这个current类的数值就是为了方便事件广播，更新UI状态，和currenthap类似
-
+    
     [Header("成长系统")]
     public GrowthSystem growthSystem;
 

@@ -80,6 +80,16 @@ public class GameManager : MonoBehaviour
             aliveEnemyList.Add(enemy);
         }
         CardDeck.instance.InitializeDeck();//初始化抽牌堆
+        player = TurnBaseManager.instance.playerObj.GetComponent<Player>();//获取玩家对象
+    }
+
+    //查找场景中的对象
+    public List<CharacterBase> GetAllCharacters()
+    {
+        List<CharacterBase> allCharacters = new List<CharacterBase>();
+        allCharacters.Add(player);
+        allCharacters.AddRange(aliveEnemyList);
+        return allCharacters;
     }
 
     //角色死亡，当有角色死亡时调用，判断是玩家死亡还是敌人死亡，发出对应的通知更改游戏状态
