@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     [Header("事件通知")]//事件通知，当游戏胜利或失败时调用
     public ObjectEventSO gameWinEvent;
     public ObjectEventSO gameOverEvent;
+    public ObjectEventSO Status_UI;
 
     private void Awake()
     {
@@ -26,6 +27,14 @@ public class GameManager : MonoBehaviour
         else
         {
             Destroy(gameObject);
+        }
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            Status_UI.RaiseEvent(null, this);
         }
     }
 
@@ -83,7 +92,7 @@ public class GameManager : MonoBehaviour
         player = TurnBaseManager.instance.playerObj.GetComponent<Player>();//获取玩家对象
     }
 
-    //查找场景中的对象
+    //返回场景中的对象
     public List<CharacterBase> GetAllCharacters()
     {
         List<CharacterBase> allCharacters = new List<CharacterBase>();

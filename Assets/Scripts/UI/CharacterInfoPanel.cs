@@ -13,11 +13,11 @@ public class CharacterInfoPanel : MonoBehaviour
         // 显示角色的牌库
         if (character is Player player)
         {
-            foreach (var cardLibraryEntry in CardManager.Instance.currentLibrary.entryList)
+            foreach (var cardLibraryEntry in CardManager.instance.currentLibrary.entryList)
             {
                 for(int i = 0;i < cardLibraryEntry.amount; i++)
                 {
-                    CardManager.Instance.CreateCard(cardLibraryEntry.cardData);//实例化卡牌
+                    CardManager.instance.CreateCard(cardLibraryEntry.cardData);//实例化卡牌
                 }
             }
         }

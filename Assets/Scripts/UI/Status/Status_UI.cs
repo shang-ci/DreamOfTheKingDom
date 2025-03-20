@@ -17,6 +17,11 @@ public class Status_UI : MonoBehaviour
     {
         allCharacters = GameManager.Instance.GetAllCharacters();
 
+        foreach (Transform child in Charaect)
+        {
+            Destroy(child.gameObject);
+        }
+
         foreach (var character in allCharacters)
         {
             GameObject newCharaect = Instantiate(charaectPrefab, Charaect);

@@ -7,7 +7,7 @@ using static UnityEngine.GraphicsBuffer;
 
 public class CardManager : MonoBehaviour
 {
-    public static CardManager Instance { get; private set; }
+    public static CardManager instance { get; private set; }
 
     //卡牌池子
     public PoolTool poolTool;
@@ -29,9 +29,9 @@ public class CardManager : MonoBehaviour
 
     private void Awake() 
     {
-        if (Instance == null)
+        if (instance == null)
         {
-            Instance = this;
+            instance = this;
             DontDestroyOnLoad(gameObject);
         }
         else

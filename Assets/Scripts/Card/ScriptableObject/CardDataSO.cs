@@ -2,13 +2,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "CardDataSO", menuName = "Card/CardDataSO")]
-public class CardDataSO : ScriptableObject
+public class CardDataSO : Item
 {
     public string cardName;
     public Sprite cardImage;
     public int cost;
     public CardType cardType;
-    //public CardTargetType cardTargetType;
     [TextArea]
     public string description;
 

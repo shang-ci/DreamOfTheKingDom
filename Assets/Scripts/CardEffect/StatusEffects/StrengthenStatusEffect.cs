@@ -55,7 +55,7 @@ public class StrengthenStatusEffect : StatusEffect
 
         foreach (var cardData in strengthStatusCards)
         {
-            var originalStatusEffect = CardManager.Instance.GetOriginalCardDataByClone(cardData);
+            var originalStatusEffect = CardManager.instance.GetOriginalCardDataByClone(cardData);
             foreach (var effect in cardData.statusEffects)
             {
                 if (effect is StrengthenStatusEffect)
@@ -69,7 +69,7 @@ public class StrengthenStatusEffect : StatusEffect
 
         foreach (var cardData in attackCards)
         {
-            var originalCardData = CardManager.Instance.GetOriginalCardDataByClone(cardData);
+            var originalCardData = CardManager.instance.GetOriginalCardDataByClone(cardData);
 
             foreach (var effect in cardData.effects)
             {

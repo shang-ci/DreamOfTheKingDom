@@ -267,4 +267,17 @@ public class CardDeck : MonoBehaviour
         }
         return attackCardCount;
     }
+
+    public List<CardDataSO> GetCurrentCardDatas()
+    {
+        var result = new List<CardDataSO>();
+        foreach (var entry in cardManager.currentLibrary.entryList)
+        {
+            for (int i = 0; i < entry.amount; i++)
+            {
+                result.Add(entry.cardData);
+            }
+        }
+        return result;
+    }
 }

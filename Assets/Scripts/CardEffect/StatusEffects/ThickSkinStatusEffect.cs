@@ -22,7 +22,7 @@ public class ThickSkinStatusEffect : StatusEffect
 
         foreach (var cardData in strengthStatusCards)
         {
-            var originalStatusEffect = CardManager.Instance.GetOriginalCardDataByClone(cardData);
+            var originalStatusEffect = CardManager.instance.GetOriginalCardDataByClone(cardData);
             foreach (var effect in cardData.statusEffects)
             {
                 if (effect is ThickSkinStatusEffect)

@@ -44,7 +44,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public void Init(CardDataSO data)
     {
         originalCardData = data; // 保存原始卡牌数据
-        cardData = CardManager.Instance.GetCardDataClone(data); // 使用卡牌数据的副本
+        cardData = CardManager.instance.GetCardDataClone(data); // 使用卡牌数据的副本
 
         //使用carddata的副本初始化卡牌的数据——这样不论是第一次抽取这张卡还是怎样都使用
         cardSprite.sprite = cardData.cardImage;

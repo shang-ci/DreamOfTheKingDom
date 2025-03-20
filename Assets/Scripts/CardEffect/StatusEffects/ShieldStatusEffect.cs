@@ -30,7 +30,7 @@ public class ShieldStatusEffect : StatusEffect
 
         foreach (var cardData in strengthStatusCards)
         {
-            var originalStatusEffectCardData = CardManager.Instance.GetOriginalCardDataByClone(cardData);
+            var originalStatusEffectCardData = CardManager.instance.GetOriginalCardDataByClone(cardData);
             foreach (var effect in cardData.statusEffects)
             {
                 if (effect is ShieldStatusEffect)

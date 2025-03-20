@@ -55,7 +55,7 @@ public class ResearchStatusEffect : StatusEffect
 
         foreach (var cardData in strengthStatusCards)
         {
-            var originalStatusEffect = CardManager.Instance.GetOriginalCardDataByClone(cardData);
+            var originalStatusEffect = CardManager.instance.GetOriginalCardDataByClone(cardData);
             foreach (var effect in cardData.statusEffects)
             {
                 if (effect is ResearchStatusEffect)
@@ -71,7 +71,7 @@ public class ResearchStatusEffect : StatusEffect
         // 还原强化卡的伤害值
         foreach (var cardData in strengthenCards)
         {
-            var originalCardData = CardManager.Instance.GetOriginalCardDataByClone(cardData);
+            var originalCardData = CardManager.instance.GetOriginalCardDataByClone(cardData);
 
             foreach (var effect in cardData.statusEffects)
             {

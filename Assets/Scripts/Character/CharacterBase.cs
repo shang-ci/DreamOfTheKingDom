@@ -26,7 +26,9 @@ public class CharacterBase : MonoBehaviour
     // 使用字典存储状态及其点数——存储的都是副本，不会影响原始数据
     public Dictionary<string, int> statusEffects = new Dictionary<string, int>();
     public List<StatusEffect> activeEffects = new List<StatusEffect>();
-    public List<CardDataSO> deck;//卡组
+
+    [Header("牌组")]
+    public List<CardDataSO> deck;//卡组——player是在TurnBaseManger里面初始化的，enemy是在enemy里面初始化的
 
     //强化卡牌有关——增强伤害
     public float baseStrength = 1f;

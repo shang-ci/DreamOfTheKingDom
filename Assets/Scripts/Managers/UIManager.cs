@@ -8,7 +8,9 @@ public class UIManager : MonoBehaviour
     public GameObject gameOverPanel;
     public GameObject pickCardPanel;
     public GameObject restRoomPanel;
-    public GameObject characetPanel;
+    public GameObject characetPanel;//gamemanager广播事件——p按钮
+
+
 
     //选择激活对应面板——再点击room事件时根据房间类型，激活不同面板
     public void OnLoadRoomEvent(object data)
@@ -39,6 +41,7 @@ public class UIManager : MonoBehaviour
         gameWinPanel.SetActive(false);
         gameOverPanel.SetActive(false);
         restRoomPanel.SetActive(false);
+        characetPanel.SetActive(false);
     }
 
     //游戏胜利事件——游戏胜利时激活胜利面板
@@ -66,5 +69,16 @@ public class UIManager : MonoBehaviour
     public void OnFinishPickCardEvent()
     {
         pickCardPanel.SetActive(false);
+    }
+
+    //激活角色面板——点击角色时激活角色面板
+    public void OnCharacterPanelEvent()
+    {
+        characetPanel.SetActive(true);
+    }
+
+    public void OnChickCloseButton()
+    {
+        characetPanel.SetActive(false);
     }
 }
