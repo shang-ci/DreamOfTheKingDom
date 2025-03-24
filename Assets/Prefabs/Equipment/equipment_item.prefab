@@ -50,7 +50,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   icon: {fileID: 331900145601652682}
-  item: {fileID: 0}
+  item: {fileID: 11400000, guid: 01be73f870c8844488b536ea54785502, type: 2}
 --- !u!1 &2732129254042005584
 GameObject:
   m_ObjectHideFlags: 0

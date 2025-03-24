@@ -22,13 +22,14 @@ public class Shop_Item : MonoBehaviour,IPointerClickHandler
     //处理点击购买事件
     public void OnPointerClick(PointerEventData eventData)
     {
+        //根据item的类型来分别传递数据
         switch(item.itemType)
         {
             case ItemType.Equipment:
-                EquipManager.instance.CreatItem(item);
+                EquipManager.instance.CreatEquipmentItem(item as Equipment_ItemData);
                 break;
             case ItemType.Card:
-                CardManager.instance.UnlockCard(cardData);
+                CardManager.instance.UnlockCard(item as CardDataSO);
                 break;
         }
     }

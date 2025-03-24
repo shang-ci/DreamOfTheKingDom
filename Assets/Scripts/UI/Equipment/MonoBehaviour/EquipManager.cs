@@ -33,14 +33,14 @@ public class EquipManager : MonoBehaviour
 
     //添加到manager中
     [ContextMenu("测试获得装备")]
-    public void CreatItem(Item item)
+    public void CreatEquipmentItem(Equipment_ItemData item)
     {
         equipmentItems.Add(item);
         AddEquipmentItem(item);
     } 
     
     //创建装备到equipmentParent里
-    public void AddEquipmentItem(Item item)
+    public void AddEquipmentItem(Equipment_ItemData item)
     {
         // 实例化新的装备项
         Equipment_Item newItem = Instantiate(equipmentItemPrefab, equipmentParent);
@@ -51,7 +51,7 @@ public class EquipManager : MonoBehaviour
 
     public void text()
     {
-        AddEquipmentItem(equipmentItems[0]);
+        AddEquipmentItem(equipmentItems[0] as Equipment_ItemData);
     }
 
 }

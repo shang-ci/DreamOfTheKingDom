@@ -3,7 +3,8 @@ using UnityEngine;
 
 public class Shop_ItemList : MonoBehaviour
 {
-    public List<Item> equipmentItems;//储存所有的装备
+    public List<Equipment_ItemData> equipmentItems;//储存所有的装备
+    public List<CardDataSO> cardDataSOItems;//存储所有的卡牌数据
     public Shop_Item shopEquipmentItemPrefab;//遗物预制体
     public CardInit cardInitPrefab;//卡牌预制体
     public Transform shopParent;//物品父物体
@@ -29,7 +30,7 @@ public class Shop_ItemList : MonoBehaviour
             Destroy(child.gameObject);
         }
 
-        foreach (Item item in equipmentItems)
+        foreach (var item in equipmentItems)
         {
             var newItem = Instantiate(shopEquipmentItemPrefab, shopParent);
             newItem.SetShopItem(item);

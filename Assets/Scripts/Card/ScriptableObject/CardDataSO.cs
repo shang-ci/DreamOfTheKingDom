@@ -11,6 +11,8 @@ public class CardDataSO : Item
     [TextArea]
     public string description;
 
+   // public override ItemType ItemType { get => base.ItemType; set => base.ItemType = value; } = ItemType.Card;
+
     // 执行的实际效果
     public List<Effect> effects;
 

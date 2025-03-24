@@ -6,7 +6,9 @@ public abstract class Effect : ScriptableObject
     public EffectTargetType targetType;
 
     // Ö´ÐÐÐ§¹û
-    public abstract void Execute(CharacterBase from, CharacterBase target);
+    public virtual void Execute(CharacterBase from, CharacterBase target) { }
+    public virtual void Execute(CharacterBase target) { }
+
 
     public virtual void Initialize(int value, EffectTargetType targetType)
     {

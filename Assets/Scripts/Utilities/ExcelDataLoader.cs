@@ -69,6 +69,7 @@ public class ExcelDataLoader : MonoBehaviour
                         List<StatusEffect> statusEffects = LoadStatusEffects(row["StatusEffects"].ToString());
 
                         cardData.Initialize(name, image, cost, cardType, description, effects, statusEffects);
+                        cardData.ItemType = ItemType.Card;//初始化默认值
                         cardDataList.Add(cardData);
 
                         // 打印每一行的数据以进行调试
