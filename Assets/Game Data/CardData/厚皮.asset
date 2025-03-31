@@ -12,6 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abf30631149f61d46a2cd8c5ab978227, type: 3}
   m_Name: "\u539A\u76AE"
   m_EditorClassIdentifier: 
+  id: 0
+  itemName: 
+  des: 
+  icon: {fileID: 0}
+  itemType: 1
+  price: 0
   cardName: "\u539A\u76AE"
   cardImage: {fileID: 21300000, guid: e3d9f50cdcd5cd34682b929fb5ffe84d, type: 3}
   cost: 1

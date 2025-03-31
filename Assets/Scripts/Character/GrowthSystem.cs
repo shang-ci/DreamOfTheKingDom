@@ -6,6 +6,7 @@ public class GrowthSystem
     private Attribute attribute;//属性
     private Aptitude aptitude;//资质
     private Seal seal;//道印
+    public int coin;//硬币数量——或许可以单独做个资源类
 
     //拿到玩家的资质和道印
     public GrowthSystem()
@@ -13,6 +14,22 @@ public class GrowthSystem
         attribute = Attribute.gold;
         aptitude = new Aptitude(1);
         seal = new Seal(Attribute.gold);
+        coin = 1000;
+    }
+
+    public void AddCoin(int value)
+    {
+        coin += value;
+    }
+
+    public int GetCoin()
+    {
+        return coin;
+    }
+
+    public void ExpendCoin(int value)
+    {
+        coin -= value;
     }
 
     // 获取道印值

@@ -11,12 +11,14 @@ public class Player : CharacterBase
     [Header("成长系统")]
     public GrowthSystem growthSystem;
 
+    protected override void Awake()
+    {
+        growthSystem = new GrowthSystem();
+    }
 
     protected override void Start()
     {
         base.Start();
-
-        growthSystem = new GrowthSystem();
     }
 
     private void OnEnable() 

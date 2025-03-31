@@ -172,6 +172,7 @@ public class CardManager : MonoBehaviour
         else
         {
             currentLibrary.entryList.Add(newCard);
+            Debug.Log("解锁了一张新卡牌");
         }
     }
 

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mapRoomDataList:
   - posX: -9.666667
-    posY: 4
+    posY: 2
     column: 0
     line: 0
     roomType: 1
@@ -22,136 +22,114 @@ MonoBehaviour:
     linkTo:
     - {x: 1, y: 0}
   - posX: -9.666667
-    posY: 2
+    posY: -2
     column: 0
     line: 1
     roomType: 1
     roomState: 2
     linkTo:
     - {x: 1, y: 1}
-  - posX: -9.666667
-    posY: 0
-    column: 0
-    line: 2
-    roomType: 1
-    roomState: 2
-    linkTo:
-    - {x: 1, y: 1}
-  - posX: -9.666667
-    posY: -2
-    column: 0
-    line: 3
-    roomType: 1
-    roomState: 2
-    linkTo:
-    - {x: 1, y: 1}
-  - posX: -9.666667
-    posY: -4
-    column: 0
-    line: 4
-    roomType: 1
-    roomState: 2
-    linkTo:
-    - {x: 1, y: 1}
-  - posX: -5.678585
+  - posX: -6.9559193
     posY: 2
     column: 1
     line: 0
     roomType: 1
     roomState: 0
     linkTo:
-    - {x: 2, y: 1}
-  - posX: -6.5839577
+    - {x: 2, y: 2}
+  - posX: -5.966718
     posY: -2
     column: 1
     line: 1
-    roomType: 1
+    roomType: 2
     roomState: 0
     linkTo:
-    - {x: 2, y: 0}
     - {x: 2, y: 2}
-  - posX: -3.3767986
+    - {x: 2, y: 0}
+    - {x: 2, y: 1}
+  - posX: -2.837319
     posY: 3
     column: 2
     line: 0
     roomType: 2
     roomState: 0
     linkTo:
-    - {x: 3, y: 0}
-  - posX: -3.1937878
+    - {x: 3, y: 1}
+  - posX: -3.6325006
     posY: 0
     column: 2
     line: 1
-    roomType: 2
-    roomState: 0
-    linkTo:
-    - {x: 3, y: 3}
-  - posX: -3.8390589
-    posY: -3
-    column: 2
-    line: 2
     roomType: 16
     roomState: 0
     linkTo:
-    - {x: 3, y: 1}
+    - {x: 3, y: 0}
+  - posX: -3.4834163
+    posY: -3
+    column: 2
+    line: 2
+    roomType: 4
+    roomState: 0
+    linkTo:
+    - {x: 3, y: 0}
     - {x: 3, y: 2}
-  - posX: -0.27500746
-    posY: 3.6
+  - posX: 0.20429158
+    posY: 3
     column: 3
     line: 0
     roomType: 4
     roomState: 0
     linkTo:
     - {x: 4, y: 1}
-  - posX: -0.0113687515
-    posY: 1.1999998
+  - posX: -0.9876728
+    posY: 0
     column: 3
     line: 1
     roomType: 16
     roomState: 0
     linkTo:
-    - {x: 4, y: 2}
-  - posX: -0.10522005
-    posY: -1.2000003
+    - {x: 4, y: 3}
+    - {x: 4, y: 0}
+  - posX: -0.3728346
+    posY: -3
     column: 3
     line: 2
     roomType: 2
     roomState: 0
     linkTo:
-    - {x: 4, y: 0}
-  - posX: 0.07992363
-    posY: -3.6000004
-    column: 3
-    line: 3
-    roomType: 2
-    roomState: 0
-    linkTo:
     - {x: 4, y: 2}
-  - posX: 3.4264898
-    posY: 3
+  - posX: 2.8809934
+    posY: 3.6
     column: 4
     line: 0
     roomType: 4
     roomState: 0
     linkTo:
     - {x: 5, y: 1}
-  - posX: 2.2901468
-    posY: 0
+  - posX: 3.3888574
+    posY: 1.1999998
     column: 4
     line: 1
     roomType: 4
     roomState: 0
     linkTo:
     - {x: 5, y: 0}
-  - posX: 2.6355937
-    posY: -3
+  - posX: 2.108067
+    posY: -1.2000003
     column: 4
     line: 2
-    roomType: 4
+    roomType: 2
     roomState: 0
     linkTo:
-    - {x: 5, y: 1}
-  - posX: 6.0540304
+    - {x: 5, y: 0}
+  - posX: 2.425349
+    posY: -3.6000004
+    column: 4
+    line: 3
+    roomType: 2
+    roomState: 0
+    linkTo:
+    - {x: 5, y: 0}
+  - posX: 6.564308
     posY: 2
     column: 5
     line: 0
@@ -159,7 +137,7 @@ MonoBehaviour:
     roomState: 0
     linkTo:
     - {x: 6, y: 0}
-  - posX: 5.9070926
+  - posX: 5.3963037
     posY: -2
     column: 5
     line: 1

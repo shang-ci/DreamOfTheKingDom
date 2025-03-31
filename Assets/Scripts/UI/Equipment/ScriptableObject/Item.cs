@@ -10,6 +10,7 @@ public class Item : ScriptableObject
     public string des;
     public Sprite icon;
     public ItemType itemType;//用来分辨数据类型——商店里需要
+    public int price;
 
     public virtual ItemType ItemType
     {
