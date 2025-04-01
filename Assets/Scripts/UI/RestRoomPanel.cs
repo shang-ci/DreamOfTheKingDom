@@ -33,7 +33,7 @@ public class RestRoomPanel : MonoBehaviour
 
     private void OnRestButtonClicked()
     {
-        restEffect.Execute(player, null);
+        restEffect.Execute(player);
         restButton.SetEnabled(false);
     }
 }

@@ -13,6 +13,7 @@ public class Player : CharacterBase
 
     protected override void Awake()
     {
+        base.Awake();
         growthSystem = new GrowthSystem();
     }
 
