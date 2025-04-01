@@ -27,7 +27,7 @@ public class CharacterInfoPanel : MonoBehaviour
         //    {
         //        for (int i = 0; i < cardLibraryEntry.amount; i++)
         //        {
-        //            CardManager.Instance.CreateCard(cardLibraryEntry.cardData);//实例化卡牌
+        //            CardManager.instance.CreateCard(cardLibraryEntry.cardData);//实例化卡牌
         //        }
         //    }
         //}

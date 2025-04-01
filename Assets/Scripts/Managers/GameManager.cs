@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager Instance;
+    public static GameManager instance;
 
     [Header("地图布局")]
     public MapLayoutSO mapLayout;//保存的地图布局数据——房间信息
@@ -17,17 +18,27 @@ public class GameManager : MonoBehaviour
     public ObjectEventSO gameOverEvent;
     public ObjectEventSO Status_UI;
 
+    [Header("角色管理")] //注意：要是怪物死了一个，还要更新这些角色的状态
+    public List<CharacterBase> allCharacters; //所有角色
+    public List<CharacterBase> playerCharacters; //所有玩家角色
+    public List<CharacterBase> enemyCharacters; //所有敌人角色
+    public CharacterBase randomCharacter;//随机角色
+    public CharacterBase playerRandomCharacter;//玩家随机角色
+    public CharacterBase enemyRandomCharacter;//敌人随机角色
+
     private void Awake()
     {
-        if (Instance == null)
+        if (instance == null)
         {
-            Instance = this;
+            instance = this;
             DontDestroyOnLoad(gameObject);
         }
         else
         {
             Destroy(gameObject);
         }
+
+        //InitializeCharacters();
     }
 
     private void Update()
@@ -37,6 +48,7 @@ public class GameManager : MonoBehaviour
             Status_UI.RaiseEvent(null, this);
         }
     }
+
 
     //加载地图时调用，清空存活的敌人列表，也就是——点击back时调用||newgame时调用
     // 加载地图，把当前房间设置为已访问状态，把相邻房间设置为锁定状态，把当前房间后面的房间设置为可访问状态
@@ -154,6 +166,16 @@ public class GameManager : MonoBehaviour
                 Debug.Log("ResetEnemyActions");
             }
         }
+    }
+
+    public void InitializeCharacters()
+    {
+        allCharacters = FindObjectsByType<CharacterBase>(FindObjectsSortMode.None).ToList();
+        playerCharacters = allCharacters.Where(c => c is Player).ToList();
+        enemyCharacters = allCharacters.Where(c => c is Enemy).ToList();
+        randomCharacter = allCharacters[Random.Range(0, allCharacters.Count)];
+        playerRandomCharacter = playerCharacters[Random.Range(0, playerCharacters.Count)];
+        enemyRandomCharacter = enemyCharacters[Random.Range(0, enemyCharacters.Count)];
     }
 
     //获取场景中的敌人对象

@@ -15,7 +15,7 @@ public class UI_Character : MonoBehaviour, IPointerDownHandler
 
     //private void Awake()
     //{
-    //    foreach (var entry in CardManager.Instance.currentLibrary.entryList)
+    //    foreach (var entry in CardManager.instance.currentLibrary.entryList)
     //    {
     //        for (int i = 0; i < entry.amount; i++)
     //        {

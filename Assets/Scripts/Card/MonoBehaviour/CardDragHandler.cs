@@ -77,11 +77,11 @@ public class CardDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, I
                             break;
                         case EffectTargetType.Target:
                             // 这里可以添加逻辑来选择一个特定的目标，例如通过点击选择敌人
-                            targetCharacter = (CharacterBase)GameManager.Instance.GetSingleOrMultipleEnemies();
+                            targetCharacter = (CharacterBase)GameManager.instance.GetSingleOrMultipleEnemies();
                             break;
                         case EffectTargetType.ALL:
                             // 这里可以添加逻辑来选择所有目标，例如对所有敌人造成伤害
-                            //targetCharacter = GameManager.Instance.GetAllEnemies();
+                            //targetCharacter = GameManager.instance.GetAllEnemies();
                             //TOOD:敌人会有多个，接受多个目标
                             break;
                         case EffectTargetType.Our:
@@ -101,11 +101,11 @@ public class CardDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, I
                             break;
                         case StatusEffectTargetType.Target:
                             // 这里可以添加逻辑来选择一个特定的目标，例如通过点击选择敌人
-                            targetCharacter = (CharacterBase)GameManager.Instance.GetSingleOrMultipleEnemies();
+                            targetCharacter = (CharacterBase)GameManager.instance.GetSingleOrMultipleEnemies();
                             break;
                         case StatusEffectTargetType.ALL:
                             // 这里可以添加逻辑来选择所有目标，例如对所有敌人造成伤害
-                            //targetCharacter = GameManager.Instance.GetAllEnemies();
+                            //targetCharacter = GameManager.instance.GetAllEnemies();
                             //TOOD:敌人会有多个，接受多个目标
                             targetCharacter = null;
                             break;

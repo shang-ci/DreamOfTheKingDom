@@ -14,7 +14,14 @@ public class Equipment_ItemData : Item
     //所有数据可能都有这两个
     [SerializeField]private Effect effect;
     [SerializeField]private StatusEffect statusEffect;
+    [SerializeField]private EquipmentTargetType targetType;
     [SerializeField]private EffectTiming timing;
+
+    public EquipmentTargetType TargetType
+    {
+        get { return targetType; }
+        set { targetType = value; }
+    }
 
     public EffectTiming Timing
     {

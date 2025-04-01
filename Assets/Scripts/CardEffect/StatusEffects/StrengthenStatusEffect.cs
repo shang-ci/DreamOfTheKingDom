@@ -43,6 +43,16 @@ public class StrengthenStatusEffect : StatusEffect
         }
     }
 
+    public override void ExecuteEffect(CharacterBase from, List<CharacterBase> targets)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override void ExecuteEffect(CharacterBase target)
+    {
+        throw new System.NotImplementedException();
+    }
+
 
     //todo:当游戏重开/战斗结束时消除状态的效果——不然强化卡的value一直增加
 

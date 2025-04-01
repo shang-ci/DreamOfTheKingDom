@@ -18,6 +18,7 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: a6644683ae5d09344953539d5a5724ff, type: 3}
   itemType: 0
   price: 50
-  eventSO: {fileID: 11400000, guid: d2025ca2389e7494bb90252d49acb97b, type: 2}
   effect: {fileID: 11400000, guid: 693518ebf27a654429756aabc2447485, type: 2}
   statusEffect: {fileID: 0}
+  targetType: 1
+  timing: 0

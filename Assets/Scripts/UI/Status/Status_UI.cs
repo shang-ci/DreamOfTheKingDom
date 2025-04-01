@@ -15,7 +15,7 @@ public class Status_UI : MonoBehaviour
 
     private void Awake()
     {
-        allCharacters = GameManager.Instance.GetAllCharacters();
+        allCharacters = GameManager.instance.GetAllCharacters();
 
         foreach (Transform child in Charaect)
         {

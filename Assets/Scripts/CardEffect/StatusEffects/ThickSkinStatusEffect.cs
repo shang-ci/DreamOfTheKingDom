@@ -15,6 +15,16 @@ public class ThickSkinStatusEffect : StatusEffect
         from.currentDamage -= from.statusEffects["ThickSkinStatusEffect"];
     }
 
+    public override void ExecuteEffect(CharacterBase from, List<CharacterBase> targets)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override void ExecuteEffect(CharacterBase target)
+    {
+        throw new System.NotImplementedException();
+    }
+
     public override void RemoveEffect(CharacterBase character)
     {
         List<CardDataSO> strengthStatusCards = CardDeck.instance.GetAllCardDataByName("∫Ò∆§");

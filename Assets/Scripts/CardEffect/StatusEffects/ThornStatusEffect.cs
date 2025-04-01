@@ -16,6 +16,16 @@ public class ThornStatusEffect : StatusEffect
         target.TakeDamage2(from.statusEffects["ThornStatusEffect"]);
     }
 
+    public override void ExecuteEffect(CharacterBase from, List<CharacterBase> targets)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override void ExecuteEffect(CharacterBase target)
+    {
+        throw new System.NotImplementedException();
+    }
+
     public override void RemoveEffect(CharacterBase character)
     {
         List<CardDataSO> strengthStatusCards = CardDeck.instance.GetAllCardDataByName("¾£¼¬");

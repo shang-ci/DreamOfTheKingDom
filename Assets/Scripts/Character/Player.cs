@@ -66,7 +66,7 @@ public class Player : CharacterBase
         {
             if (effect.timing == timing)
             {
-                effect.ExecuteEffect(this, (CharacterBase)GameManager.Instance.GetSingleOrMultipleEnemies());
+                effect.ExecuteEffect(this, (CharacterBase)GameManager.instance.GetSingleOrMultipleEnemies());
             }
         }
     }

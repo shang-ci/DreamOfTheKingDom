@@ -52,12 +52,39 @@ public class EquipManager : MonoBehaviour
 
     public void ExecuteEquipmentEffect(EffectTiming _timing)
     {
-        foreach(var item in equipmentItemsData)
+        foreach (var item in equipmentItems)//遍历所有的装备，看能不能执行它
         {
-            if(item.Timing == _timing)
+            if (item.item.Timing == _timing)//这里关注装备的时机，而不是效果的时机
             {
-                item.Execute(TurnBaseManager.instance.player, TurnBaseManager.instance.player);
+                switch (item.item.TargetType)//为每个装备找到目标——注意：要是怪物死了一个，还要更新这些角色的状态
+                {
+                    case EquipmentTargetType.Self:
+                        item.target = GameManager.instance.playerRandomCharacter;
+                        break;
+                    case EquipmentTargetType.Target:
+                        item.target = GameManager.instance.enemyRandomCharacter;
+                        break;
+                    case EquipmentTargetType.Our:
+                        item.targets = GameManager.instance.playerCharacters;
+                        break;
+                    case EquipmentTargetType.Enemies:
+                        item.targets = GameManager.instance.enemyCharacters;
+                        break;
+                    case EquipmentTargetType.ALL:
+                        item.targets = GameManager.instance.allCharacters;
+                        break;
+                    case EquipmentTargetType.Random:
+                        item.target = GameManager.instance.randomCharacter;
+                        break;
+                }
+
+                if (item.target != null)
+                    item.Execute(GameManager.instance.playerRandomCharacter, item.target);
+                else if (item.targets != null)
+                    item.Execute(GameManager.instance.playerRandomCharacter, item.targets);
             }
+
+
         }
     }
 

@@ -11,7 +11,7 @@ public class InspireEffect : Effect
     {
         // Ëæ»úÆúÖÀxÕÅ¿¨
         discardRandomCardEvent?.RaiseEvent(value, this);
-        //GameManager.Instance.aliveEnemyList[0].TakeDamage(10 * value);
+        //GameManager.instance.aliveEnemyList[0].TakeDamage(10 * value);
         target.TakeDamage(10 * value);
     }
 }

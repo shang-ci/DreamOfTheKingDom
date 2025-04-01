@@ -14,10 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 3003
   itemName: "\u6E6E\u706D\u4E4B\u773C"
-  des: "\u7ED9\u76EE\u6807\u6DFB\u52A01\u70B9\u6E6E\u706D\u503C"
+  des: "\u7ED9\u76EE\u6807\u6DFB\u52A01\u70B9\u8346\u68D8"
   icon: {fileID: 21300000, guid: 92c6fbc1833686244a56633c96eadc6f, type: 3}
   itemType: 0
   price: 35
-  eventSO: {fileID: 0}
-  effect: {fileID: 11400000, guid: 32a39aee3869fee4cbf940ddba44c74e, type: 2}
-  statusEffect: {fileID: 0}
+  effect: {fileID: 0}
+  statusEffect: {fileID: 11400000, guid: 6b88b9796eeb7f340bb2f17dc0e58ef0, type: 2}
+  targetType: 0
+  timing: 0

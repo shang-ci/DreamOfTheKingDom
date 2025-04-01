@@ -22,6 +22,7 @@ public class TurnBaseManager : MonoBehaviour
     private int enemyTurnCount = 0; // 敌人回合计数
 
     [Header("事件广播")]
+    public ObjectEventSO newGame;//新游戏事件——每次遭遇新战斗时触发
     public ObjectEventSO playerTurnBegin;//玩家回合结束用敌人回合开始代替表示，也可以在这里把抽牌阶段抽取出来
     public ObjectEventSO enemyTurnBegin;
     public ObjectEventSO enemyTurnEnd;
@@ -72,11 +73,13 @@ public class TurnBaseManager : MonoBehaviour
     [ContextMenu("Game Start")]
     public void GameStart()
     {
+        newGame.RaiseEvent(null, this);//新游戏事件——每次遭遇新战斗时触发
+
         playerObj.GetComponent<Player>().ClearAllStatusEffects();//清除玩家身上的所有状态
         player = playerObj.GetComponent<Player>();
         player.deck = CardDeck.instance.GetCurrentCardDatas();//这里能保证player的deck每次都是最新的
 
-        enemy = (Enemy)GameManager.Instance.GetSingleOrMultipleEnemies();//TOOD：这里返回的敌人可以是多个，所以不能只用Enemy类型接收，以后要改成Enemy[]
+        enemy = (Enemy)GameManager.instance.GetSingleOrMultipleEnemies();//TOOD：这里返回的敌人可以是多个，所以不能只用Enemy类型接收，以后要改成Enemy[]
 
         isPlayerTurn = true;
         isEnemyTurn = false;
@@ -85,12 +88,7 @@ public class TurnBaseManager : MonoBehaviour
         playerTurnCount = 0;
         enemyTurnCount = 0;
 
-        //测试代码——强化卡还原移除强化效果
-        //List<CardDataSO> attackCards = CardDeck.instance.GetAllCardDataByName("攻击");
-        //foreach (var cardData in attackCards)
-        //{
-        //    Debug.Log(cardData.description);
-        //}
+        EffectTimingManager.Instance.ChangeEffectTiming(EffectTiming.NewGame);
     }
 
     public void PlayerTurnBegin()

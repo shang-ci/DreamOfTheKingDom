@@ -34,6 +34,18 @@ public enum CardTargetType
     Self//自己
 }
 
+//装备的类型
+public enum EquipmentTargetType
+{
+    Self,//自己
+    Target,//单个敌人
+    ALL,//所有角色
+    Our,//己方所有人
+    Enemies,//所有敌人
+    Random,//随机一个目标
+}
+
+
 public enum EffectType
 {
     Purification,//净化
@@ -67,6 +79,14 @@ public enum StatusEffectTargetType
 //触发时机
 public enum EffectTiming
 {
+    #region 装备的时机
+
+    NewGame,//进入新战斗
+
+    #endregion
+
+    #region 状态卡牌的时机
+
     Reseach,//研究卡牌打出触发研究这一时机
     Strengthen,//强化卡牌打出触发强化这一时机
     OnPlayerTurn,//玩家回合
@@ -85,6 +105,8 @@ public enum EffectTiming
     CrimsonMark,//猩红印记
     PlayerCrimsonMark,//玩家猩红印记
     EnemyCrimsonMark,//敌人猩红印记
+
+    #endregion
     None
     // 添加其他执行时机
 }

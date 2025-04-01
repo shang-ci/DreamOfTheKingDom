@@ -11,10 +11,22 @@ public class CrimsonMarkStatusEffect : StatusEffect
         // 猩红印记效果不在打出时触发
     }
 
+
     public override void ExecuteEffect(CharacterBase from, CharacterBase target)
     {
         from.TakeDamage(from.statusEffects["CrimsonMarkStatusEffect"] * 2);
     }
+
+    public override void ExecuteEffect(CharacterBase from, List<CharacterBase> targets)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override void ExecuteEffect(CharacterBase target)
+    {
+        throw new System.NotImplementedException();
+    }
+
 
     public override void RemoveEffect(CharacterBase character)
     {

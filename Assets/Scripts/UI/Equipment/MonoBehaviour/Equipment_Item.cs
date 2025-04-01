@@ -10,6 +10,7 @@ public class Equipment_Item : MonoBehaviour
     public Equipment_ItemData item;
     private int id;
 
+
     [Header("效果目标")]
     public CharacterBase target;
     public List<CharacterBase> targets;
@@ -26,17 +27,26 @@ public class Equipment_Item : MonoBehaviour
     #region 执行效果
     public void Execute(CharacterBase from, CharacterBase target)
     {
-        item.Effect.Execute(from, target);
+        if (item.Effect != null)
+            item.Effect.Execute(from, target);
+        else if (item.StatusEffect != null)
+            item.StatusEffect.ExecuteEffect(from, target);
     }
 
     public void Execute(CharacterBase from, List<CharacterBase> targets)
     {
-        item.Effect.Execute(from, targets);
+        if (item.Effect != null)
+            item.Effect.Execute(from, targets);
+        else if (item.StatusEffect != null)
+            item.StatusEffect.ExecuteEffect(from, targets);
     }
 
     public void Execute(CharacterBase target)
     {
-        item.Effect.Execute(target);
+        if (item.Effect != null)
+            item.Effect.Execute(target);
+        else if (item.StatusEffect != null)
+            item.StatusEffect.ExecuteEffect(target);
     }
     #endregion
 }

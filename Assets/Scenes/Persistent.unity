@@ -2236,6 +2236,7 @@ GameObject:
   - component: {fileID: 806605662}
   - component: {fileID: 806605663}
   - component: {fileID: 806605664}
+  - component: {fileID: 806605665}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -2276,6 +2277,12 @@ MonoBehaviour:
   gameWinEvent: {fileID: 11400000, guid: d0e1b4b8bcc770548b6a8d6af8358f51, type: 2}
   gameOverEvent: {fileID: 11400000, guid: d15647e59613b26438757ea3a973e806, type: 2}
   Status_UI: {fileID: 11400000, guid: 12e853c3237776a449464311fa73ff99, type: 2}
+  allCharacters: []
+  playerCharacters: []
+  enemyCharacters: []
+  randomCharacter: {fileID: 0}
+  playerRandomCharacter: {fileID: 0}
+  enemyRandomCharacter: {fileID: 0}
 --- !u!114 &806605661
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2391,6 +2398,34 @@ MonoBehaviour:
       - m_Target: {fileID: 806605660}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: OnNewGameEvent
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &806605665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 806605658}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84b4c4ed9f6ad66418b122795e3d1fe7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventSO: {fileID: 11400000, guid: 5b31be38466e4c1479e8ef7734d6b8f0, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 806605660}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: InitializeCharacters
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2958,6 +2993,7 @@ MonoBehaviour:
   battleEnd: 1
   enemyTurnDuration: 2.5
   playerTurnDuration: 1.5
+  newGame: {fileID: 0}
   playerTurnBegin: {fileID: 11400000, guid: d2025ca2389e7494bb90252d49acb97b, type: 2}
   enemyTurnBegin: {fileID: 11400000, guid: 50d20d9cd530e104e8fd9526e4c2ff5b, type: 2}
   enemyTurnEnd: {fileID: 11400000, guid: 2fc814c9930e93541b75731d65c81a46, type: 2}
@@ -3205,8 +3241,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   equipmentParent: {fileID: 1124365211}
   equipmentItemPrefab: {fileID: 4439323724862293522, guid: 8c7a532ca339faf4499f6a67f993fb45, type: 3}
-  equipmentItems:
-  - {fileID: 11400000, guid: 01be73f870c8844488b536ea54785502, type: 2}
+  equipmentItemsData: []
+  equipmentItems: []
 --- !u!114 &1253943736
 MonoBehaviour:
   m_ObjectHideFlags: 0

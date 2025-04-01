@@ -19,6 +19,11 @@ public class CardDataSO : Item
     // 状态效果
     public List<StatusEffect> statusEffects;
 
+    private void Awake()
+    {
+        ItemType = ItemType.Card;
+    }
+
     public void Initialize(string name, Sprite image, int cost, CardType type, string description, List<Effect> effects, List<StatusEffect> statusEffects)
     {
         this.cardName = name;

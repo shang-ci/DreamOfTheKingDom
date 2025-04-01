@@ -23,6 +23,16 @@ public class ShieldStatusEffect : StatusEffect
         }
     }
 
+    public override void ExecuteEffect(CharacterBase from, List<CharacterBase> targets)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override void ExecuteEffect(CharacterBase target)
+    {
+        throw new System.NotImplementedException();
+    }
+
     public override void RemoveEffect(CharacterBase character)
     {
         List<CardDataSO> strengthStatusCards = CardDeck.instance.GetAllCardDataByName("»¤¶Ü");
