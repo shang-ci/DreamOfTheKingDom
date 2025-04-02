@@ -95,6 +95,7 @@ public class TurnBaseManager : MonoBehaviour
     {
         playerTurnCount++;
         playerTurnBegin.RaiseEvent(null, this);
+        EffectTimingManager.Instance.ChangeEffectTiming(EffectTiming.OnPlayerTurn);
         player.UpdateStatusEffectRounds();//更新玩家状态效果回合数
     }
 
@@ -104,6 +105,7 @@ public class TurnBaseManager : MonoBehaviour
         enemyTurnCount++;
         isEnemyTurn = true;
         enemyTurnBegin.RaiseEvent(null, this);
+        EffectTimingManager.Instance.ChangeEffectTiming(EffectTiming.OnEnemyTurn);
         enemy.UpdateStatusEffectRounds();//更新敌人状态效果回合数
     }
 

@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a7f78bddfbaa024b9152bd1d1b5b895, type: 3}
   m_Name: NewGameEvent
   m_EditorClassIdentifier: 
-  description: 
-  lastSender: 
+  description: "\u5F00\u59CB\u65B0\u7684\u6E38\u620F"
+  lastSender: MenuPanel (MenuPanel)
