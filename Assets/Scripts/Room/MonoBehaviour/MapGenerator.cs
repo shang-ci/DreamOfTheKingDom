@@ -7,9 +7,9 @@ using UnityEngine;
 public class MapGenerator : MonoBehaviour
 {
     [Header("地图配置表")]
-    public MapConfigSO mapConfig;
+    public MapConfigSO mapConfig;//控制地图有哪些数据
     [Header("地图布局")]
-    public MapLayoutSO mapLayout;
+    public MapLayoutSO mapLayout;//地图具体的房间信息、连线等
     [Header("预制体")]
     public Room roomPrefab;
     public LineRenderer linePrefab;
@@ -37,14 +37,16 @@ public class MapGenerator : MonoBehaviour
         {
             roomDataDict.Add(roomData.roomType, roomData);
         }
+        // 每次启动的时候，从文件中加载 MapLayoutSO
+        DataManager.instance.LoadFromFile(mapLayout);//——不需要了，手动或自动选择保存数据，来决定是否加载之前的地图
     }
 
     private void Start() {
-        // 每次启动的时候，从文件中加载 MapLayoutSO
-        DataManager.instance.LoadFromFile(mapLayout);
+        
     }
 
     private void OnEnable() {
+        Debug.Log($"Map layout has {mapLayout.mapRoomDataList.Count} rooms and {mapLayout.linePositionList.Count} lines on enable.");
         if (mapLayout.mapRoomDataList.Count > 0)
         {
             LoadMap();
@@ -52,7 +54,14 @@ public class MapGenerator : MonoBehaviour
         else
         {
             CreateMap();//只有新游戏开始才会创建一次房间
+            Debug.Log("创建地图");
         }
+    }
+
+    private void OnDisable()
+    {
+        // 关闭时保存地图
+        SaveMap();
     }
 
     //其实也就是只要生成一次地图，就可以一直用这个地图，不会每次都重新生成，除非点击了重新生成地图的按钮

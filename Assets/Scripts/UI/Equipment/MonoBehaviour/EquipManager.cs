@@ -7,7 +7,7 @@ public class EquipManager : MonoBehaviour
     public static EquipManager instance;
     public Transform equipmentParent;
     public Equipment_Item equipmentItemPrefab;
-    public List<Equipment_ItemData> equipmentItemsData = new List<Equipment_ItemData>();
+    public List<Equipment_ItemData> equipmentItemsData = new List<Equipment_ItemData>();//可以用来保存装备数据，读取时再加载出来
     public List<Equipment_Item> equipmentItems = new List<Equipment_Item>();
 
 

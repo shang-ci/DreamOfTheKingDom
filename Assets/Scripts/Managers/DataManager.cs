@@ -30,6 +30,8 @@ public class DataManager : MonoBehaviour
             Directory.CreateDirectory(jsonFolder);
         }
         File.WriteAllText(filePath, jsonData);
+
+        Debug.Log("写入地图");
     }
 
     /// <summary>
@@ -47,6 +49,11 @@ public class DataManager : MonoBehaviour
         {
             var stringData = File.ReadAllText(filePath);
             JsonConvert.PopulateObject(stringData, mapLayout);
+            Debug.Log($"Loaded map layout with {mapLayout.mapRoomDataList.Count} rooms and {mapLayout.linePositionList.Count} lines.");
+        }
+        else
+        {
+            Debug.LogWarning("Map layout file not found.");
         }
     }
 }
