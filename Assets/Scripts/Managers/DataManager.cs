@@ -19,7 +19,7 @@ public class DataManager : MonoBehaviour
     }
 
     /// <summary>
-    /// 将 mapLayout 序列化成字符串，并写入到文件中
+    /// 将 _mapLayout 序列化成字符串，并写入到文件中
     /// </summary>
     public void SaveToFile(MapLayoutSO mapLayout)
     {
@@ -35,11 +35,11 @@ public class DataManager : MonoBehaviour
     }
 
     /// <summary>
-    /// 从文件中读取数据，并写入到 mapLayout
+    /// 从文件中读取数据，并写入到 _mapLayout
     /// </summary>
     public void LoadFromFile(MapLayoutSO mapLayout)
     {
-        // 首先把 mapLayout 清空一下
+        // 首先把 _mapLayout 清空一下
         mapLayout.mapRoomDataList.Clear();
         mapLayout.linePositionList.Clear();
 

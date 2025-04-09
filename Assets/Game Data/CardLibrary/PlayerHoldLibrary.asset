@@ -12,4 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47315cb43c1d8a343bc5e7dc26e8ce08, type: 3}
   m_Name: PlayerHoldLibrary
   m_EditorClassIdentifier: 
-  entryList: []
+  entryList:
+  - cardData: {fileID: 0}
+    amount: 5
+  - cardData: {fileID: 0}
+    amount: 1
+  - cardData: {fileID: 0}
+    amount: 1
+  - cardData: {fileID: 0}
+    amount: 1
+  - cardData: {fileID: 0}
+    amount: 1
+  - cardData: {fileID: 0}
+    amount: 1
+  - cardData: {fileID: 0}
+    amount: 2

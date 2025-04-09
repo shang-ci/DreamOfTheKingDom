@@ -10,6 +10,9 @@ public class GameManager : MonoBehaviour
     [Header("地图布局")]
     public MapLayoutSO mapLayout;//保存的地图布局数据——房间信息
 
+    [Header("地图判断条件")]
+    [SerializeField] private bool isNewGame = false;//判断是否是新游戏——如果是新游戏就重新生成地图，如果不是就加载地图
+
     public List<Enemy> aliveEnemyList = new List<Enemy>();//存活的敌人列表——表示可以有多个敌人——在点击进入时先清空再读取填充
     public Player player;
 
@@ -153,7 +156,16 @@ public class GameManager : MonoBehaviour
     {
         mapLayout.mapRoomDataList.Clear();
         mapLayout.linePositionList.Clear();
+        isNewGame = true;
+
+        CardManager.instance.InitializeCardLibrary();
     }
+
+    public void OnLoadGameEvent()
+    {
+        isNewGame = false;
+    }
+
 
     //还原对局里所有敌人的effect数据——在加载房间后调用——因为敌人的actionDataSO是同一个所以可以在下一次战斗时对该敌人的effect数据进行还原
     public void ResetEnemyActions()
@@ -192,4 +204,12 @@ public class GameManager : MonoBehaviour
     {
         return aliveEnemyList; // 返回所有敌人的集合
     }
+
+    #region 访问器
+    public bool IsNewGame
+    {
+        get { return isNewGame ; }
+        set { isNewGame = value; }
+    }
+    #endregion
 }

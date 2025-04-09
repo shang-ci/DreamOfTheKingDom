@@ -4,25 +4,32 @@ using System.IO;
 using Newtonsoft.Json;
 using UnityEngine;
 
+//点击新游戏时会跳转到地图场景
 public class MapGenerator : MonoBehaviour
 {
     [Header("地图配置表")]
     public MapConfigSO mapConfig;//控制地图有哪些数据
+
     [Header("地图布局")]
     public MapLayoutSO mapLayout;//地图具体的房间信息、连线等
+
     [Header("预制体")]
     public Room roomPrefab;
     public LineRenderer linePrefab;
 
+    [Header("地图边界")]
     private float screenHeight;
     private float screenWidth;
     private float columnWidth;
     private Vector3 generatePoint;
     public float border;
+
+    [Header("地图数据")]
     private List<Room> rooms = new List<Room>();//存储所有房间
     private List<LineRenderer> lines = new List<LineRenderer>();
     public List<RoomDataSO> roomDataList = new List<RoomDataSO>();//存储所有类型房间数据——用来绑定房间数据和房间类型
     private Dictionary<RoomType, RoomDataSO> roomDataDict = new Dictionary<RoomType, RoomDataSO>();//用来绑定房间数据和房间类型
+
 
     private void Awake()
     {
@@ -38,20 +45,36 @@ public class MapGenerator : MonoBehaviour
             roomDataDict.Add(roomData.roomType, roomData);
         }
         // 每次启动的时候，从文件中加载 MapLayoutSO
-        DataManager.instance.LoadFromFile(mapLayout);//——不需要了，手动或自动选择保存数据，来决定是否加载之前的地图
+        //DataManager.instance.LoadFromFile(_mapLayout);//——不需要了，手动或自动选择保存数据，来决定是否加载之前的地图
     }
 
-    private void Start() {
-        
+    //回合enable冲突
+    //private void Start() {
+    //    Debug.Log($"Map layout has {_mapLayout.mapRoomDataList.Count} rooms and {_mapLayout.linePositionList.Count} lines on enable.");
+    //    if (_mapLayout.mapRoomDataList.Count > 0 && !GameManager.instance.IsNewGame)
+    //    {
+    //        LoadMap();
+    //    }
+    //    else if (GameManager.instance.IsNewGame)
+    //    {
+    //        CreateMap();//只有新游戏开始才会创建一次房间
+    //        Debug.Log("创建地图");
+    //    }
+    //}
+
+    private void OnEnable()
+    {
+        LoadOrCreatMap();
     }
 
-    private void OnEnable() {
+    private void LoadOrCreatMap()
+    {
         Debug.Log($"Map layout has {mapLayout.mapRoomDataList.Count} rooms and {mapLayout.linePositionList.Count} lines on enable.");
-        if (mapLayout.mapRoomDataList.Count > 0)
+        if (mapLayout.mapRoomDataList.Count > 0 )//&& !GameManager.instance.IsNewGame)这里不需要多余的isnewgame来判断了，因为在gamemanager里开始新游戏时会清空数据的
         {
             LoadMap();
         }
-        else
+        else if(GameManager.instance.IsNewGame)
         {
             CreateMap();//只有新游戏开始才会创建一次房间
             Debug.Log("创建地图");

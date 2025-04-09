@@ -48,19 +48,13 @@ public class CardManager : MonoBehaviour
 
         //根据Excel表中的卡牌数据初始化新游戏卡牌库
         InitializeNewGameCardLibrary();
-
-        // 根据策划游戏的内容自行调整——将初始卡牌添加到当前卡牌库，这样在游戏结束时回到主菜单再次开始游戏时，卡牌库不会被清空，若想要重新打关卡，可以写个newgame函数重新赋值
-        foreach (var item in newGameCardLibrary.entryList)
-        {
-            currentLibrary.entryList.Add(item);
-        }
     }
 
     // 游戏结束时清空卡牌库
-    private void OnDisable() 
-    {
-        currentLibrary.entryList.Clear();    
-    }
+    //private void OnDisable() 
+    //{
+    //    currentLibrary.entryList.Clear();    
+    //}
 
     #region 获取项目卡牌，从addressable group中读取card data
 
@@ -109,7 +103,15 @@ public class CardManager : MonoBehaviour
 
     }
 
-
+    // 初始化卡牌库——将新游戏卡牌库的卡牌数据复制到当前卡牌库——根据是新游戏还是加载数据来选择
+    public void InitializeCardLibrary()
+    {
+        // 将新游戏卡牌库的卡牌数据复制到当前卡牌库
+        foreach (var entry in newGameCardLibrary.entryList)
+        {
+            currentLibrary.entryList.Add(new CardLibraryEntry { cardData = entry.cardData, amount = entry.amount });
+        }
+    }
 
     /// <summary>
     /// 抽卡时调用的函数获得卡牌 GameObject——这里的是从对象池中获取卡牌，对象池里有7个卡牌，也就是说最多同时存在7个卡牌在手牌中
